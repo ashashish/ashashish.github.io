@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
   <head>
@@ -9,42 +8,36 @@
 
     <div class="body">z-index: 9999999999</div>
 
-<script class="slack_script" id="slack_script" src="https://www.socialintents.com/api/chat/socialintents.1.3.js#2c9faa3586fae0ef0186ff78ac490279" async="async">
+    <script class="slack_script" id="slack_script" src="https://www.socialintents.com/api/chat/socialintents.1.3.js#2c9faa3586fae0ef0186ff78ac490279" async="async"></script>
 
-  .si-chat-window {
-  z-index: 2147483648; /* Set the z-index to a value higher than the Surfly widget */
-}
+    <script>
+      (function(s,u,r,f,l,y){s[f]=s[f]||{init:function(){s[f].q=arguments}};
+      l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
+      l.src='https://surfly.com/surfly.js';y.parentNode.insertBefore(l,y);})
+      (window,document,'script','Surfly');
 
+      Surfly.init({widget_key:'513065a5492743e6a6340aec09b7e4d1'}, init => {
+          if (init.success) {
+              // display the default Surfly button
+              Surfly.button();
+          }
+      });
 
-</script>
-
-<script>
-  (function(s,u,r,f,l,y){s[f]=s[f]||{init:function(){s[f].q=arguments}};
-  l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
-  l.src='https://surfly.com/surfly.js';y.parentNode.insertBefore(l,y);})
-  (window,document,'script','Surfly');
-
-  Surfly.init({widget_key:'513065a5492743e6a6340aec09b7e4d1'}, init => {
-      if (init.success) {
-          // display the default Surfly button
-          Surfly.button();
+      if(!Surfly.isInsideSession){
+        Surfly.button();
+          // Add your chat solution's snippet below
+          // End of chat snippet
       }
-  });
+    </script>
 
-  if(!Surfly.isInsideSession){
-    Surfly.button();
-      // Add your chat solution's snippet below
-      // End of chat snippet
-  }
-</script>
+    <style>
+      .body {
+          z-index: 2147483647;
+      }
 
-    
-<style>
-        body {
-            z-index: 2147483647;
-        }
-</style>
-    
-    
+      .si-chat-window {
+          z-index: 2147483648; /* Set the z-index to a value higher than the Surfly widget */
+      }
+    </style>
   </body>
 </html>
