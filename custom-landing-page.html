@@ -7,22 +7,25 @@
 	<h1>Welcome to our Website</h1>
 	<p>Thank you for visiting our website. To get started, please click the button below:</p>
 	<button onclick="start()">Start</button>
-	<p id="sessidtext" style="display:none">Session Code: <span id="sessidtarget"></span></p>
+	<p id="session-info" style="display:none">Session Code: <span id="sessidtarget">...</span><br>An agent will be joining you shortly if your details match the appointment time slot booked for you.</p>
 	<script>
 		function start() {
-			var firstName = prompt("Please enter your first name:");
-			if (!/^[A-Za-z]+$/.test(firstName)) {
-				alert("Please enter a valid first name.");
+			var firstName = prompt("Please enter your first name (only alphabets):");
+			var lastName = prompt("Please enter your last name (only alphabets):");
+			var email = prompt("Please enter your email (abc@xyz.com format):");
+
+			if (!/^[a-zA-Z]+$/.test(firstName)) {
+				alert("Invalid First Name. Please enter only alphabets.");
 				return;
 			}
-			var lastName = prompt("Please enter your last name:");
-			if (!/^[A-Za-z]+$/.test(lastName)) {
-				alert("Please enter a valid last name.");
+
+			if (!/^[a-zA-Z]+$/.test(lastName)) {
+				alert("Invalid Last Name. Please enter only alphabets.");
 				return;
 			}
-			var email = prompt("Please enter your email:");
+
 			if (!/\S+@\S+\.\S+/.test(email)) {
-				alert("Please enter a valid email address.");
+				alert("Invalid Email. Please enter in abc@xyz.com format.");
 				return;
 			}
 
@@ -33,6 +36,8 @@
 				startSession(firstName, lastName, email);
 			};
 			document.body.appendChild(startButton);
+
+			document.querySelector("#session-info").style.display = "none";
 		}
 
 		function startSession(firstName, lastName, email) {
@@ -40,10 +45,16 @@
 			Surfly.session()
 				.on("session_created", function(session, event) {
 					// display the PIN of the current session
-					document.querySelector("#sessidtext").style.display = "block";
 					document.querySelector("#sessidtarget").innerText = session.pin;
+
+					// Display session info
+					document.querySelector("#session-info").style.display = "block";
 				})
-				.startLeader(null, {name: firstName + ' ' + lastName, email: email})
+				.startLeader(null, {name: firstName + ' ' + lastName, email: email});
+
+			// Remove start session button
+			var startButton = document.querySelector("button");
+			startButton.parentNode.removeChild(startButton);
 		}
 	</script>
 
