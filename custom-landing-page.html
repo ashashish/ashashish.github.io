@@ -7,37 +7,21 @@
 	<h1>Welcome to our Website</h1>
 	<p>Thank you for visiting our website. To get started, please click the button below:</p>
 	<button onclick="start()">Start</button>
-	<p id="session-info" style="display:none">Session Code: <span id="sessidtarget">...</span><br>An agent will be joining you shortly if your details match the appointment time slot booked for you.</p>
+	<p id="session-info" style="display:none">Session Code: <span id="sessidtarget"></span><br>An agent will be joining you shortly if your details match the appointment time slot booked for you</p>
 	<script>
 		function start() {
-			var firstName = prompt("Please enter your first name (only alphabets):");
-			var lastName = prompt("Please enter your last name (only alphabets):");
-			var email = prompt("Please enter your email (abc@xyz.com format):");
-
-			if (!/^[a-zA-Z]+$/.test(firstName)) {
-				alert("Invalid First Name. Please enter only alphabets.");
-				return;
-			}
-
-			if (!/^[a-zA-Z]+$/.test(lastName)) {
-				alert("Invalid Last Name. Please enter only alphabets.");
-				return;
-			}
-
-			if (!/\S+@\S+\.\S+/.test(email)) {
-				alert("Invalid Email. Please enter in abc@xyz.com format.");
-				return;
-			}
+			var firstName = prompt("Please enter your first name:");
+			var lastName = prompt("Please enter your last name:");
+			var email = prompt("Please enter your email:");
 
 			// Start session button
 			var startButton = document.createElement("button");
 			startButton.innerHTML = "Start Session";
 			startButton.onclick = function() {
 				startSession(firstName, lastName, email);
+				startButton.remove(); // hide the "Start Session" button after clicked
 			};
 			document.body.appendChild(startButton);
-
-			document.querySelector("#session-info").style.display = "none";
 		}
 
 		function startSession(firstName, lastName, email) {
@@ -46,15 +30,9 @@
 				.on("session_created", function(session, event) {
 					// display the PIN of the current session
 					document.querySelector("#sessidtarget").innerText = session.pin;
-
-					// Display session info
-					document.querySelector("#session-info").style.display = "block";
+					document.querySelector("#session-info").style.display = "block"; // show the session info paragraph after PIN generation
 				})
-				.startLeader(null, {name: firstName + ' ' + lastName, email: email});
-
-			// Remove start session button
-			var startButton = document.querySelector("button");
-			startButton.parentNode.removeChild(startButton);
+				.startLeader(null, {name: firstName + ' ' + lastName, email: email})
 		}
 	</script>
 
