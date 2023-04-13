@@ -7,7 +7,7 @@
 	<h1>Welcome to our Website</h1>
 	<p>Thank you for visiting our website. To get started, please click the button below:</p>
 	<button onclick="start()">Start</button>
-	<p id="session-info" style="display:none">Session Code: <span id="sessidtarget"></span><br>You will be joined by an agent shortly if the entered details match the booked appointment</p>
+	<p id="session-info" style="display:none">Session Code: <span id="sessidtarget"></span><br>An agent will be joining you shortly if your details match the appointment time slot booked for you</p>
 	<script>
 		function start() {
 			var firstName = prompt("Please enter your first name:");
@@ -19,7 +19,7 @@
 			startButton.innerHTML = "Start Session";
 			startButton.onclick = function() {
 				startSession(firstName, lastName, email);
-				startButton.style.display = "none"; // hide the "Start Session" button after clicked
+				startButton.remove(); // hide the "Start Session" button after clicked
 			};
 			document.body.appendChild(startButton);
 		}
