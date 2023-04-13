@@ -7,7 +7,7 @@
 	<h1>Welcome to our Website</h1>
 	<p>Thank you for visiting our website. To get started, please click the button below:</p>
 	<button onclick="start()">Start</button>
-	<p id="session-info" style="display:none">Session Code: <span id="sessidtarget"></span><br>An agent will be joining you shortly if your details match the appointment time slot booked for you</p>
+	<p id="session-msg">Session Code: <span id="sessidtarget">...</span></p>
 	<script>
 		function start() {
 			var firstName = prompt("Please enter your first name:");
@@ -19,9 +19,10 @@
 			startButton.innerHTML = "Start Session";
 			startButton.onclick = function() {
 				startSession(firstName, lastName, email);
-				startButton.remove(); // hide the "Start Session" button after clicked
 			};
 			document.body.appendChild(startButton);
+
+			document.querySelector("#session-msg").style.display = "none";
 		}
 
 		function startSession(firstName, lastName, email) {
@@ -30,9 +31,12 @@
 				.on("session_created", function(session, event) {
 					// display the PIN of the current session
 					document.querySelector("#sessidtarget").innerText = session.pin;
-					document.querySelector("#session-info").style.display = "block"; // show the session info paragraph after PIN generation
+					document.querySelector("#session-msg").style.display = "block";
+					document.querySelector("#session-msg").innerText = "Session Code: " + session.pin + "\nAn agent will be joining you shortly if your details match the appointment time slot booked for you.";
 				})
-				.startLeader(null, {name: firstName + ' ' + lastName, email: email})
+				.startLeader(null, {name: firstName + ' ' + lastName, email: email});
+
+			document.querySelector("button").style.display = "none";
 		}
 	</script>
 
