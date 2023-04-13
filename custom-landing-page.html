@@ -7,12 +7,24 @@
 	<h1>Welcome to our Website</h1>
 	<p>Thank you for visiting our website. To get started, please click the button below:</p>
 	<button onclick="start()">Start</button>
-	<p>Session Code: <span id="sessidtarget">...</span></p>
+	<p id="sessidtext" style="display:none">Session Code: <span id="sessidtarget"></span></p>
 	<script>
 		function start() {
 			var firstName = prompt("Please enter your first name:");
+			if (!/^[A-Za-z]+$/.test(firstName)) {
+				alert("Please enter a valid first name.");
+				return;
+			}
 			var lastName = prompt("Please enter your last name:");
+			if (!/^[A-Za-z]+$/.test(lastName)) {
+				alert("Please enter a valid last name.");
+				return;
+			}
 			var email = prompt("Please enter your email:");
+			if (!/\S+@\S+\.\S+/.test(email)) {
+				alert("Please enter a valid email address.");
+				return;
+			}
 
 			// Start session button
 			var startButton = document.createElement("button");
@@ -28,6 +40,7 @@
 			Surfly.session()
 				.on("session_created", function(session, event) {
 					// display the PIN of the current session
+					document.querySelector("#sessidtext").style.display = "block";
 					document.querySelector("#sessidtarget").innerText = session.pin;
 				})
 				.startLeader(null, {name: firstName + ' ' + lastName, email: email})
@@ -45,6 +58,7 @@
 			// Surfly session options can be set here, or at the Company/Plan levels.
 			widget_key: '9eb008187dca447685c55d80614e1d18',
 			hide_until_agent_joins: true,
+			session_start_confirmation: false,
             		url: "https://www.google.com"
 		};
 
@@ -52,7 +66,7 @@
 			if (initResult.success) {
 				// API calls can now be made!
 				if (!Surfly.isInsideSession) {
-					Surfly.button();
+				//	Surfly.button();
 				}
 			}
 			else {
