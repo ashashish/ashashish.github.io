@@ -7,6 +7,7 @@
 	<h1>Welcome to our Website</h1>
 	<p>Thank you for visiting our website. To get started, please click the button below:</p>
 	<button onclick="start()">Start</button>
+	<p>Session Code: <span id="sessidtarget">...</span></p>
 	<script>
 		function start() {
 			var firstName = prompt("Please enter your first name:");
@@ -24,10 +25,15 @@
 
 		function startSession(firstName, lastName, email) {
 			// Call the .startLeader method to start the session with user's information
-			Surfly.session().startLeader(null, {name: firstName + ' ' + lastName, email: email})
+			Surfly.session()
+				.on("session_created", function(session, event) {
+					// display the PIN of the current session
+					document.querySelector("#sessidtarget").innerText = session.pin;
+				})
+				.startLeader(null, {name: firstName + ' ' + lastName, email: email})
 		}
 	</script>
-  
+
 	<script>
 		(function(s,u,r,f,l,y){
 			s[f]=s[f]||{init:function(){s[f].q=arguments}};
@@ -38,6 +44,8 @@
 		var settings = {
 			// Surfly session options can be set here, or at the Company/Plan levels.
 			widget_key: '9eb008187dca447685c55d80614e1d18',
+			hide_until_agent_joins: true,
+            		url: "https://www.google.com"
 		};
 
 		Surfly.init(settings, function(initResult) {
@@ -52,6 +60,5 @@
 			}
 		});
 	</script>
-  
 </body>
 </html>
