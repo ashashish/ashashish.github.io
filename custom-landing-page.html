@@ -24,7 +24,7 @@
 
 		function startSession(firstName, lastName, email) {
 			// Call the .startLeader method to start the session with user's information
-			Surfly.startLeader(null, {name: firstName + ' ' + lastName, email: email});
+			Surfly.session().startLeader(null, {name: firstName + ' ' + lastName, email: email})
 		}
 	</script>
   
