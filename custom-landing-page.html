@@ -9,38 +9,49 @@
 	<button onclick="start()">Start</button>
 	<script>
 		function start() {
-			// Add your code to start the application here
+			var firstName = prompt("Please enter your first name:");
+			var lastName = prompt("Please enter your last name:");
+			var email = prompt("Please enter your email:");
+
+			// Start session button
+			var startButton = document.createElement("button");
+			startButton.innerHTML = "Start Session";
+			startButton.onclick = function() {
+				startSession(firstName, lastName, email);
+			};
+			document.body.appendChild(startButton);
+		}
+
+		function startSession(firstName, lastName, email) {
+			// Call the .startLeader method to start the session with user's information
+			Surfly.startLeader(null, {name: firstName + ' ' + lastName, email: email});
 		}
 	</script>
-
   
-  <script>
-(function(s,u,r,f,l,y){s[f]=s[f]||{init:function(){s[f].q=arguments}};
-l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
-l.src='https://surfly.com/surfly.js';y.parentNode.insertBefore(l,y);})
-(window,document,'script','Surfly');
+	<script>
+		(function(s,u,r,f,l,y){
+			s[f]=s[f]||{init:function(){s[f].q=arguments}};
+			l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
+			l.src='https://surfly.com/surfly.js';y.parentNode.insertBefore(l,y);
+		})(window,document,'script','Surfly');
 
-var settings = {
-// Surfly session options can be set here, or at the Company/Plan levels.
-widget_key: '9eb008187dca447685c55d80614e1d18',
-private_session: true, // to make sure only logged in agents can join the call
-password_required: false,
-};
+		var settings = {
+			// Surfly session options can be set here, or at the Company/Plan levels.
+			widget_key: '9eb008187dca447685c55d80614e1d18',
+		};
 
-Surfly.init(settings, function(initResult) {
-    if (initResult.success) {
-        // API calls can now be made!
-        if (!Surfly.isInsideSession) {
-            Surfly.button();
-        }
-    }
-    else{
-        console.log("Surfly was unable to initialize properly.")
-    }
-});
-</script>
-
-  
+		Surfly.init(settings, function(initResult) {
+			if (initResult.success) {
+				// API calls can now be made!
+				if (!Surfly.isInsideSession) {
+					Surfly.button();
+				}
+			}
+			else {
+				console.log("Surfly was unable to initialize properly.")
+			}
+		});
+	</script>
   
 </body>
 </html>
