@@ -5,14 +5,26 @@
 </head>
 <body>
 	<h1>Welcome to our Website</h1>
-	<p>Thank you for visiting our website. To get started, please click the button below:</p>
-	<button onclick="start()">Start</button>
+	<p>Thank you for visiting our website. To get started, please enter your details below:</p>
+	<form id="start-form">
+		<label for="firstName">First Name:</label>
+		<input type="text" id="firstName" name="firstName" required><br><br>
+
+		<label for="lastName">Last Name:</label>
+		<input type="text" id="lastName" name="lastName" required><br><br>
+
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email" required><br><br>
+
+		<button type="submit">Start</button>
+	</form>
 	<p id="session-info" style="display:none">Session Code: <span id="sessidtarget"></span><br>An agent will be joining you shortly if your details match the appointment time slot booked for you</p>
 	<script>
-		function start() {
-			var firstName = prompt("Please enter your first name:");
-			var lastName = prompt("Please enter your last name:");
-			var email = prompt("Please enter your email:");
+		document.querySelector('#start-form').addEventListener('submit', function(event) {
+			event.preventDefault();
+			var firstName = document.querySelector('#firstName').value;
+			var lastName = document.querySelector('#lastName').value;
+			var email = document.querySelector('#email').value;
 
 			// Start session button
 			var startButton = document.createElement("button");
@@ -22,7 +34,10 @@
 				startButton.remove(); // hide the "Start Session" button after clicked
 			};
 			document.body.appendChild(startButton);
-		}
+
+			// Hide the form after the user submits it
+			document.querySelector('#start-form').style.display = 'none';
+		});
 
 		function startSession(firstName, lastName, email) {
 			// Call the .startLeader method to start the session with user's information
@@ -59,9 +74,4 @@
 				}
 			}
 			else {
-				console.log("Surfly was unable to initialize properly.")
-			}
-		});
-	</script>
-</body>
-</html>
+				console.log("
