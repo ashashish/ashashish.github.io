@@ -18,7 +18,7 @@
 
 		<button type="submit">Start</button>
 	</form>
-	<div id="session-info" style="display:none">Session Code: <span id="sessidtarget"></span><br><br><img src="https://i.gifer.com/5XTS.gif" alt="hourglass"></div>
+	<p id="session-info" style="display:none">Session Code: <span id="sessidtarget"></span><br><br><b>An agent will be joining you shortly if your details match the appointment time slot booked for you</b></p>
 	<script>
 		document.querySelector('#start-form').addEventListener('submit', function(event) {
 			event.preventDefault();
@@ -37,9 +37,6 @@
 
 			// Hide the form after the user submits it
 			document.querySelector('#start-form').style.display = 'none';
-
-			// Show the animated GIF
-			document.querySelector('#session-info').style.display = 'block';
 		});
 
 		function startSession(firstName, lastName, email) {
@@ -48,7 +45,7 @@
 				.on("session_created", function(session, event) {
 					// display the PIN of the current session
 					document.querySelector("#sessidtarget").innerText = session.pin;
-					document.querySelector("#session-info").style.display = "none"; // hide the animated GIF after PIN generation
+					document.querySelector("#session-info").style.display = "block"; // show the session info paragraph after PIN generation
 				})
 				.startLeader(null, {name: firstName + ' ' + lastName, email: email})
 		}
