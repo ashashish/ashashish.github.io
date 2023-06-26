@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Landing Page</title>
+	<title>Landing Page without PIN - Example</title>
+	<style>
+		@keyframes blink {
+			0% {
+				opacity: 1;
+			}
+			50% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+
+		.blinking-dots {
+			animation: blink 1.5s infinite;
+		}
+	</style>
 </head>
 <body>
-	<h1>Welcome to live shopping assitance</h1>
-	<br><br><b>An agent will join you in this session very shortly.</b></p> 
+	<h1>Welcome to live shopping assistance</h1>
+	<br><br><b>An agent will join you in this session very shortly<span class="blinking-dots">...</span></b></p>	
 	<script>
 		(function(s,u,r,f,l,y){
 			s[f]=s[f]||{init:function(){s[f].q=arguments}};
@@ -32,7 +49,6 @@
             .startLeader();
         }
         });
-    </script>
-
+	</script>
 </body>
 </html>
