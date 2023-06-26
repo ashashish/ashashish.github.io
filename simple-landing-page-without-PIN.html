@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Landing Page</title>
+</head>
+<body>
+	<h1>Welcome to live assitance session</h1>
+	<p>Thank you for visiting our website. To get started, please enter your details below:</p>
+	<br><br><b>An agent will be joining you in a moment in this session</b></p>
+	<script>
+		(function(s,u,r,f,l,y){
+			s[f]=s[f]||{init:function(){s[f].q=arguments}};
+			l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
+			l.src='https://surfly.com/surfly.js';y.parentNode.insertBefore(l,y);
+		})(window,document,'script','Surfly');
+
+		var settings = {
+			// Surfly session options can be set here, or at the Company/Plan levels.
+			widget_key: '9eb008187dca447685c55d80614e1d18',
+			hide_until_agent_joins: true,
+			session_start_confirmation: false,
+            		url: "https://www.flipkart.com"
+		};
+
+        // Surfly.init() must be called before any other API call
+        Surfly.init(settings, function(init) {
+        if (init.success && !Surfly.isInsideSession) {
+            Surfly.session()
+            .on("session_created", function(session, event) {
+                // display the PIN of the current session
+                // document.querySelector("#sessidtarget").innerText = session.pin;
+            })
+            .startLeader();
+        }
+        });
+    </script>
+
+</body>
+</html>
