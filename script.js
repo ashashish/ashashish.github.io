@@ -11,7 +11,7 @@ popup.style.transform = "translate(-50%, -50%)";
 popup.style.backgroundColor = "white";
 popup.style.padding = "20px";
 popup.style.border = "1px solid black";
-popup.style.zIndex = "2147483647"; // Set the z-index to a high value
+popup.style.zIndex = "9999"; // Set the z-index to a high value
 
 // Create the title element
 var title = document.createElement("h2");
