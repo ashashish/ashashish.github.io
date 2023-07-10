@@ -8,37 +8,35 @@
 	<br>
 	<p>Book rooms together with your friends in real-time.</p>
 
-	<!-- Start Session -->
-	<h2>Start a Co-Booking Session</h2>
-	<p>Click the "Co-Booking" button below to start a co-booking session:</p>
-	<button id="startSessionButton">Co-Booking</button>
-	<br><br>
-	<p id="startSessionInfo" style="display: none"><b>Co-Booking Code: </b><span id="startSessionCode"></span></p>
-
 	<!-- Join Session -->
-<!-- Join Session -->
-<h2>Join a Co-Booking Session</h2>
-<p>Enter the co-booking code below and click "Join" to join a co-booking session:</p>
-<form id="joinSessionForm">
-    <input type="text" id="joinSessionCodeInput" placeholder="Co-Booking Code" required>
-    <button type="submit">Join</button>
-</form>
-<p id="joinErrorMessage" style="display: none; color: red;">Incorrect co-booking code. Please try again.</p>
+	<h2>Join a Co-Booking Session</h2>
+	<p>Enter the co-booking code below and click "Join" to join a co-booking session:</p>
+	<form id="joinSessionForm">
+		<input type="text" id="joinSessionCodeInput" placeholder="Co-Booking Code" required>
+		<button type="submit">Join</button>
+	</form>
+	<p id="joinErrorMessage" style="display: none; color: red;">Incorrect co-booking code. Please try again.</p>
 
-<script>
-    // Join Session
-    document.querySelector('#joinSessionForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        joinSession();
-    });
+	<script>
+		// Join Session
+		document.querySelector('#joinSessionForm').addEventListener('submit', function(event) {
+			event.preventDefault();
+			joinSession();
+		});
 
-    function joinSession() {
-        var joinCode = document.querySelector('#joinSessionCodeInput').value;
+		function joinSession() {
+			var joinCode = document.querySelector('#joinSessionCodeInput').value;
 
-        // Call the .session method to join the Surfly session
-        Surfly.session(settings, '#joinSessionCodeInput').startFollower();
-    }
-</script>
+			// Call the .session method to join the Surfly session as a follower
+			Surfly.init(settings, function(initResult) {
+				if (initResult.success) {
+					Surfly.session(settings, joinCode).startFollower();
+				} else {
+					console.log("Surfly was unable to initialize properly.");
+				}
+			});
+		}
+	</script>
 
 	<script>
 		(function(s, u, r, f, l, y) {
@@ -57,14 +55,6 @@
 			session_start_confirmation: false,
 			url: "https://www.airbnb.com"
 		};
-
-		Surfly.init(settings, function(initResult) {
-			if (initResult.success) {
-				// API calls can now be made!
-			} else {
-				console.log("Surfly was unable to initialize properly.");
-			}
-		});
 	</script>
 </body>
 </html>
