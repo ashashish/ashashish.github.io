@@ -8,15 +8,6 @@
 	<br>
 	<p>Book rooms together with your friends in real-time.</p>
 
-	<!-- Start Session -->
-	<h2>Start a Co-Booking Session</h2>
-	<p>To begin your co-booking session, enter a 9-digit PIN below and click "Start Session":</p>
-	<form id="startSessionForm">
-		<input type="text" id="startSessionPinInput" placeholder="9-Digit PIN" required>
-		<button type="submit">Start Session</button>
-	</form>
-	<p id="startErrorMessage" style="display: none; color: red;">Incorrect PIN. Please try again.</p>
-
 	<!-- Join Session -->
 	<h2>Join a Co-Booking Session</h2>
 	<p>Enter the co-booking code below and click "Join" to join a co-booking session:</p>
@@ -27,24 +18,6 @@
 	<p id="joinErrorMessage" style="display: none; color: red;">Incorrect co-booking code. Please try again.</p>
 
 	<script>
-		// Start Session
-		document.querySelector('#startSessionForm').addEventListener('submit', function(event) {
-			event.preventDefault();
-			startSession();
-		});
-
-		function startSession() {
-			var pin = document.querySelector('#startSessionPinInput').value;
-
-			// Call the .session method to start the Surfly session
-			Surfly.session()
-				.on("session_created", function(session, event) {
-					// Redirect to the co-booking session URL
-					window.location.href = session.url;
-				})
-				.startLeader(pin);
-		}
-
 		// Join Session
 		document.querySelector('#joinSessionForm').addEventListener('submit', function(event) {
 			event.preventDefault();
@@ -55,15 +28,20 @@
 			var joinCode = document.querySelector('#joinSessionCodeInput').value;
 
 			// Call the .session method to join the Surfly session as a follower
-			Surfly.session()
-				.on("session_joined", function(session, event) {
-					// Redirect to the co-booking session URL
-					window.location.href = session.url;
-				})
-				.on("session_join_error", function(session, event) {
-					document.querySelector('#joinErrorMessage').style.display = 'block';
-				})
-				.startFollower(joinCode);
+			Surfly.init(function(initResult) {
+				if (initResult.success) {
+					Surfly.session().startFollower(joinCode)
+						.then(function(session) {
+							// Redirect to the co-booking session URL
+							window.location.href = session.url;
+						})
+						.catch(function() {
+							document.querySelector('#joinErrorMessage').style.display = 'block';
+						});
+				} else {
+					console.log("Surfly was unable to initialize properly.");
+				}
+			});
 		}
 	</script>
 
@@ -76,15 +54,6 @@
 			l.src = 'https://surfly.com/surfly.js';
 			y.parentNode.insertBefore(l, y);
 		})(window, document, 'script', 'Surfly');
-
-		Surfly.init(function(initResult) {
-			if (initResult.success) {
-				// API calls can now be made!
-			} else {
-				console.log("Surfly was unable to initialize properly.");
-			}
-		});
 	</script>
-
 </body>
 </html>
