@@ -16,53 +16,38 @@
 	<p id="startSessionInfo" style="display: none"><b>Co-Booking Code: </b><span id="startSessionCode"></span></p>
 
 	<!-- Join Session -->
-	<h2>Join a Co-Booking Session</h2>
-	<p>Enter the co-booking code below and click "Join" to join a co-booking session:</p>
-	<form id="joinSessionForm">
-		<input type="text" id="joinSessionCodeInput" placeholder="Co-Booking Code" required>
-		<button type="submit">Join</button>
-	</form>
-	<p id="joinErrorMessage" style="display: none; color: red;">Incorrect co-booking code. Please try again.</p>
+<!-- Join Session -->
+<h2>Join a Co-Booking Session</h2>
+<p>Enter the co-booking code below and click "Join" to join a co-booking session:</p>
+<form id="joinSessionForm">
+    <input type="text" id="joinSessionCodeInput" placeholder="Co-Booking Code" required>
+    <button type="submit">Join</button>
+</form>
+<p id="joinErrorMessage" style="display: none; color: red;">Incorrect co-booking code. Please try again.</p>
 
-	<script>
-		// Start Session
-		document.querySelector('#startSessionButton').addEventListener('click', function() {
-			startSession();
-			document.querySelector('#startSessionButton').disabled = true; // Disable the button after it's clicked
-		});
+<script>
+    // Join Session
+    document.querySelector('#joinSessionForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        joinSession();
+    });
 
-		function startSession() {
-			// Call the .session method to start the Surfly session
-			Surfly.session()
-				.on("session_created", function(session, event) {
-					// Display the formattedId code of the current session
-					document.querySelector("#startSessionCode").innerText = Surfly.listSessions()[0]._formattedId;
-					document.querySelector("#startSessionInfo").style.display = "block"; // Show the session info paragraph after code retrieval
-				})
-				.startLeader(null, { name: "", email: "" }); // You can pass the user's name and email here if needed
-		}
+    function joinSession() {
+        var joinCode = document.querySelector('#joinSessionCodeInput').value;
 
-		// Join Session
-		document.querySelector('#joinSessionForm').addEventListener('submit', function(event) {
-			event.preventDefault();
-			joinSession();
-		});
-
-		function joinSession() {
-			var joinCode = document.querySelector('#joinSessionCodeInput').value;
-
-			// Call the .session method to join the Surfly session
-			Surfly.session()
-				.on("session_joined", function(session, event) {
-					// Redirect to the co-booking session URL
-					window.location.href = session.url;
-				})
-				.on("session_join_error", function(session, event) {
-					document.querySelector('#joinErrorMessage').style.display = 'block';
-				})
-				.startFollower(joinCode);
-		}
-	</script>
+        // Call the .session method to join the Surfly session
+        Surfly.session()
+            .on("session_joined", function(session, event) {
+                // Redirect to the co-booking session URL
+                window.location.href = session.url;
+            })
+            .on("session_join_error", function(session, event) {
+                document.querySelector('#joinErrorMessage').style.display = 'block';
+            })
+            .follower()
+            .join(joinCode);
+    }
+</script>
 
 	<script>
 		(function(s, u, r, f, l, y) {
