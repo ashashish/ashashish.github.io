@@ -4,12 +4,18 @@
 	<title>Landing Page</title>
 </head>
 <body>
-	<h1>Welcome to our Website</h1>
-	<p>To book rooms together with your friends in real-time, please click the "Book Together" button below:</p>
+	<h1>Welcome to Demo replicae of AirBnb Website</h1>
+	<br>
+	<p>Book rooms together with your friends in real-time, please click the "Co-Booking" button below:</p>
 	<button id="bookTogetherButton">Book Together</button>
+	<br>
+	<b>Please share following unique co-booking code with your friends who you want to book together. No installation required!</b>
+	<p id="session-info" style="display: none">Co-booking Code: <span id="sessionCode"></span><br><br></p>
+	<br>
+	Just ask them to go to AirBnb.com and scroll all the way to botton-right corner and click on "Join a co-booking session" to enter this code!
+	<br>
 
-	<p id="session-info" style="display: none">Session Code: <span id="sessionCode"></span><br><br><b>Please communicate the following code to your friends so they can join you in this co-booking session.</b></p>
-
+	
 	<script>
 		document.querySelector('#bookTogetherButton').addEventListener('click', function() {
 			startSession();
