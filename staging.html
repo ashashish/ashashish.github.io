@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,15 +31,14 @@
 			// Call the .session method to join the Surfly session as a follower
 			Surfly.init(function(initResult) {
 				if (initResult.success) {
-					Surfly.session()
-						.on("session_joined", function(session, event) {
+					Surfly.session().startFollower(joinCode)
+						.then(function(session) {
 							// Redirect to the co-booking session URL
 							window.location.href = session.url;
 						})
-						.on("session_join_error", function(session, event) {
+						.catch(function() {
 							document.querySelector('#joinErrorMessage').style.display = 'block';
-						})
-						.startFollower(joinCode);
+						});
 				} else {
 					console.log("Surfly was unable to initialize properly.");
 				}
@@ -58,3 +58,5 @@
 	</script>
 </body>
 </html>
+
+
