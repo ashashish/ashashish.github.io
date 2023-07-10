@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Landing Page</title>
+	<title>Co-Booking</title>
 </head>
 <body>
-	<h1>Welcome to Demo replicae of AirBnb Website</h1>
+	<h1>Welcome to Demo Replica of Airbnb Website</h1>
 	<br>
-	<p>Book rooms together with your friends in real-time, please click the "Co-Booking" button below:</p>
-	<button id="bookTogetherButton">Book Together</button>
-	<br><br>
-	<b>Please share following unique co-booking code with your friends who you want to book together. No installation required!</b>
-	<p id="session-info" style="display: none">Co-booking Code: <span id="sessionCode"></span><br><br></p>
-	<br><br>
-	Just ask them to go to AirBnb.com and scroll all the way to botton-right corner and click on "Join a co-booking session" to enter this code!
-	<br><br>
+	<p>Book rooms together with your friends in real-time.</p>
 
-	
+	<!-- Start Session -->
+	<h2>Start a Co-Booking Session</h2>
+	<p>Click the "Co-Booking" button below to start a co-booking session:</p>
+	<button id="startSessionButton">Co-Booking</button>
+	<br><br>
+	<p id="startSessionInfo" style="display: none"><b>Co-Booking Code: </b><span id="startSessionCode"></span></p>
+
+	<!-- Join Session -->
+	<h2>Join a Co-Booking Session</h2>
+	<p>Enter the co-booking code below and click "Join" to join a co-booking session:</p>
+	<form id="joinSessionForm">
+		<input type="text" id="joinSessionCodeInput" placeholder="Co-Booking Code" required>
+		<button type="submit">Join</button>
+	</form>
+	<p id="joinErrorMessage" style="display: none; color: red;">Incorrect co-booking code. Please try again.</p>
+
 	<script>
-		document.querySelector('#bookTogetherButton').addEventListener('click', function() {
+		// Start Session
+		document.querySelector('#startSessionButton').addEventListener('click', function() {
 			startSession();
-			document.querySelector('#bookTogetherButton').disabled = true; // Disable the button after it's clicked
+			document.querySelector('#startSessionButton').disabled = true; // Disable the button after it's clicked
 		});
 
 		function startSession() {
@@ -27,10 +36,31 @@
 			Surfly.session()
 				.on("session_created", function(session, event) {
 					// Display the formattedId code of the current session
-					document.querySelector("#sessionCode").innerText = Surfly.listSessions()[0]._formattedId;
-					document.querySelector("#session-info").style.display = "block"; // Show the session info paragraph after code retrieval
+					document.querySelector("#startSessionCode").innerText = Surfly.listSessions()[0]._formattedId;
+					document.querySelector("#startSessionInfo").style.display = "block"; // Show the session info paragraph after code retrieval
 				})
 				.startLeader(null, { name: "", email: "" }); // You can pass the user's name and email here if needed
+		}
+
+		// Join Session
+		document.querySelector('#joinSessionForm').addEventListener('submit', function(event) {
+			event.preventDefault();
+			joinSession();
+		});
+
+		function joinSession() {
+			var joinCode = document.querySelector('#joinSessionCodeInput').value;
+
+			// Call the .session method to join the Surfly session
+			Surfly.session()
+				.on("session_joined", function(session, event) {
+					// Redirect to the co-booking session URL
+					window.location.href = session.url;
+				})
+				.on("session_join_error", function(session, event) {
+					document.querySelector('#joinErrorMessage').style.display = 'block';
+				})
+				.startFollower(joinCode);
 		}
 	</script>
 
