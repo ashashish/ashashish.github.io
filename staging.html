@@ -4,17 +4,13 @@
 	<title>Landing Page</title>
 </head>
 <body>
-	<h1>Welcome to Demo replicae of AirBnb Website</h1>
+	<h1>Welcome to Demo Replica of Airbnb Website</h1>
 	<br>
 	<p>Book rooms together with your friends in real-time, please click the "Co-Booking" button below:</p>
-	<button id="bookTogetherButton">Book Together</button>
+	<button id="bookTogetherButton">Co-Booking</button>
 	<br><br>
-	<b>Please share following unique co-booking code with your friends who you want to book together. No installation required!</b>
-	<p id="session-info" style="display: none">Co-booking Code: <span id="sessionCode"></span><br><br></p>
+	<p id="session-info" style="display: none">Co-Booking Code: <span id="sessionCode"></span><br><br></p>
 	<br><br>
-	Just ask them to go to AirBnb.com and scroll all the way to botton-right corner and click on "Join a co-booking session" to enter this code!
-	<br><br>
-
 	
 	<script>
 		document.querySelector('#bookTogetherButton').addEventListener('click', function() {
@@ -29,10 +25,16 @@
 					// Display the formattedId code of the current session
 					document.querySelector("#sessionCode").innerText = Surfly.listSessions()[0]._formattedId;
 					document.querySelector("#session-info").style.display = "block"; // Show the session info paragraph after code retrieval
+					document.querySelector("#coBookingInstructions").style.display = "block"; // Show the co-booking instructions
 				})
 				.startLeader(null, { name: "", email: "" }); // You can pass the user's name and email here if needed
 		}
 	</script>
+
+	<div id="coBookingInstructions" style="display: none">
+		<p>Please share the following unique co-booking code with your friends whom you want to book together. No installation required!</p>
+		<p>Just ask them to go to Airbnb.com and scroll all the way to the bottom-right corner and click on "Join a Co-Booking Session" to enter this code!</p>
+	</div>
 
 	<script>
 		(function(s, u, r, f, l, y) {
