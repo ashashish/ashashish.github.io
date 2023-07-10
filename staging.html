@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Landing Page</title>
+</head>
+<body>
+	<h1>Welcome to our Website</h1>
+	<p>To book rooms together with your friends in real-time, please click the "Book Together" button below:</p>
+	<button id="bookTogetherButton">Book Together</button>
+
+	<p id="session-info" style="display: none">Session Code: <span id="sessionCode"></span><br><br><b>Please communicate the following code to your friends so they can join you in this co-booking session.</b></p>
+
+	<script>
+		document.querySelector('#bookTogetherButton').addEventListener('click', function() {
+			startSession();
+			document.querySelector('#bookTogetherButton').disabled = true; // Disable the button after it's clicked
+		});
+
+		function startSession() {
+			// Call the .session method to start the Surfly session
+			Surfly.session()
+				.on("session_created", function(session, event) {
+					// Display the formattedId code of the current session
+					document.querySelector("#sessionCode").innerText = Surfly.listSessions()[0]._formattedId;
+					document.querySelector("#session-info").style.display = "block"; // Show the session info paragraph after code retrieval
+				})
+				.startLeader(null, { name: "", email: "" }); // You can pass the user's name and email here if needed
+		}
+	</script>
+
+	<script>
+		(function(s, u, r, f, l, y) {
+			s[f] = s[f] || { init: function() { s[f].q = arguments; } };
+			l = u.createElement(r);
+			y = u.getElementsByTagName(r)[0];
+			l.async = 1;
+			l.src = 'https://surfly.com/surfly.js';
+			y.parentNode.insertBefore(l, y);
+		})(window, document, 'script', 'Surfly');
+
+		var settings = {
+			// Surfly session options can be set here, or at the Company/Plan levels.
+			widget_key: '9eb008187dca447685c55d80614e1d18',
+			hide_until_agent_joins: true,
+			session_start_confirmation: false,
+			url: "https://www.airbnb.com"
+		};
+
+		Surfly.init(settings, function(initResult) {
+			if (initResult.success) {
+				// API calls can now be made!
+			} else {
+				console.log("Surfly was unable to initialize properly.");
+			}
+		});
+	</script>
+</body>
+</html>
