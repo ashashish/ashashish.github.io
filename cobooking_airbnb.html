@@ -4,12 +4,13 @@
 	<title>Landing Page</title>
 </head>
 <body>
-	<h1>Welcome to our Website</h1>
-	<p>To book rooms together with your friends in real time, please click the "Book Together" button below:</p>
-	<button id="bookTogetherButton">Book Together</button>
-
-	<p id="session-info" style="display: none">Session Code: <span id="sessionCode"></span><br><br><b>Please communicate following 9 digit PIN to your friends so they can join you in this cobooking session.</b></p>
-
+	<h1>Welcome to Demo Replica of Airbnb Website</h1>
+	<br>
+	<p>Book rooms together with your friends in real-time, please click the "Co-Booking" button below:</p>
+	<button id="bookTogetherButton">Co-Booking</button>
+	<br><br>
+	<p id="session-info" style="display: none"><b>Co-Booking Code: </b><span id="sessionCode"></span><br><br></p>
+	
 	<script>
 		document.querySelector('#bookTogetherButton').addEventListener('click', function() {
 			startSession();
@@ -20,13 +21,19 @@
 			// Call the .session method to start the Surfly session
 			Surfly.session()
 				.on("session_created", function(session, event) {
-					// Display the PIN of the current session
-					document.querySelector("#sessionCode").innerText = session.pin;
-					document.querySelector("#session-info").style.display = "block"; // Show the session info paragraph after PIN generation
+					// Display the formattedId code of the current session
+					document.querySelector("#sessionCode").innerText = Surfly.listSessions()[0]._formattedId;
+					document.querySelector("#session-info").style.display = "block"; // Show the session info paragraph after code retrieval
+					document.querySelector("#coBookingInstructions").style.display = "block"; // Show the co-booking instructions
 				})
 				.startLeader(null, { name: "", email: "" }); // You can pass the user's name and email here if needed
 		}
 	</script>
+
+	<div id="coBookingInstructions" style="display: none">
+		<p><b>Please share the following unique co-booking code with your friends whom you want to book together. No installation required!</b></p>
+		<p>Just ask them to go to Airbnb.com and scroll all the way to the bottom-right corner and click on "Join a Co-Booking Session" to enter this code!</p>
+	</div>
 
 	<script>
 		(function(s, u, r, f, l, y) {
