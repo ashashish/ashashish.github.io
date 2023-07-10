@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Co-Booking</title>
+</head>
+<body>
+	<h1>Welcome to Co-Booking</h1>
+	<br>
+	<p>To start a co-booking session, please click the "Start Co-Booking Session" button below:</p>
+	<button id="startButton">Start Co-Booking Session</button>
+	<br><br>
+	<p>Or if you have a co-booking code, enter it below to join a co-booking session:</p>
+	<form id="joinForm">
+		<input type="text" id="joinCodeInput" placeholder="Enter Co-Booking Code" required>
+		<button type="submit">Join Co-Booking Session</button>
+	</form>
+	<br>
+	<p id="joinErrorMessage" style="display: none; color: red;">Incorrect co-booking code. Please try again.</p>
+
+	<script>
+		document.querySelector('#startButton').addEventListener('click', function() {
+			startSession();
+			document.querySelector('#startButton').disabled = true; // Disable the button after it's clicked
+		});
+
+		function startSession() {
+			// Call the .session method to start the Surfly session
+			Surfly.session()
+				.on("session_created", function(session, event) {
+					// Redirect to the co-booking session URL
+					window.location.href = session.url;
+				})
+				.startLeader();
+		}
+
+		document.querySelector('#joinForm').addEventListener('submit', function(event) {
+			event.preventDefault();
+			joinSession();
+		});
+
+		function joinSession() {
+			var joinCode = document.querySelector('#joinCodeInput').value;
+
+			// Call the .session method to join the Surfly session
+			Surfly.session()
+				.on("session_joined", function(session, event) {
+					// Redirect to the co-booking session URL
+					window.location.href = session.url;
+				})
+				.on("session_join_error", function(session, event) {
+					document.querySelector('#joinErrorMessage').style.display = 'block';
+				})
+				.join(joinCode);
+		}
+	</script>
+
+	<script>
+		(function(s, u, r, f, l, y) {
+			s[f] = s[f] || { init: function() { s[f].q = arguments; } };
+			l = u.createElement(r);
+			y = u.getElementsByTagName(r)[0];
+			l.async = 1;
+			l.src = 'https://surfly.com/surfly.js';
+			y.parentNode.insertBefore(l, y);
+		})(window, document, 'script', 'Surfly');
+
+		Surfly.init(function(initResult) {
+			if (initResult.success) {
+				// API calls can now be made!
+			} else {
+				console.log("Surfly was unable to initialize properly.");
+			}
+		});
+	</script>
+</body>
+</html>
