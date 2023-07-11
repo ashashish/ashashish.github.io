@@ -51,7 +51,7 @@
 			var joinCode = document.querySelector('#joinSessionCodeInput').value;
 
 			// Call the .session method to join the Surfly session as a follower
-			var followerSession = Surfly.session(settings, joinCode);
+			var followerSession = Surfly.session(settings, '"' + joinCode + '"');
 			followerSession.startFollower();
 			followerSession.on("session_error", function() {
 				document.querySelector('#joinErrorMessage').style.display = 'block';
