@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Co-Booking</title>
+	<title>Landing Page</title>
 </head>
 <body>
 	<h1>Welcome to Demo Replica of Airbnb Website</h1>
 	<br>
 	<p>Book rooms together with your friends in real-time.</p>
 
+	
 	<!-- Join Session -->
 	<h2>Join a Co-Booking Session</h2>
 	<p>Enter the co-booking code below and click "Join" to join a co-booking session:</p>
@@ -18,7 +19,35 @@
 	<p id="joinErrorMessage" style="display: none; color: red;">Incorrect co-booking code. Please try again.</p>
 
 	<script>
-		// Join Session
+		(function(s, u, r, f, l, y) {
+			s[f] = s[f] || { init: function() { s[f].q = arguments; } };
+			l = u.createElement(r);
+			y = u.getElementsByTagName(r)[0];
+			l.async = 1;
+			l.src = 'https://surfly.com/surfly.js';
+			y.parentNode.insertBefore(l, y);
+		})(window, document, 'script', 'Surfly');
+
+		var settings = {
+			// Surfly session options can be set here, or at the Company/Plan levels.
+			widget_key: '9eb008187dca447685c55d80614e1d18',
+		};
+
+		Surfly.init(settings, function(initResult) {
+			if (initResult.success) {
+				// API calls can now be made!
+				if (!Surfly.isInsideSession) {
+				}
+			} else {
+				console.log("Surfly was unable to initialize properly.");
+			}
+		});
+
+		document.querySelector('#startSessionButton').addEventListener('click', function() {
+			startSession();
+			document.querySelector('#startSessionButton').disabled = true; // Disable the button after it's clicked
+		});
+
 		document.querySelector('#joinSessionForm').addEventListener('submit', function(event) {
 			event.preventDefault();
 			joinSession();
@@ -28,32 +57,8 @@
 			var joinCode = document.querySelector('#joinSessionCodeInput').value;
 
 			// Call the .session method to join the Surfly session as a follower
-			Surfly.init(function(initResult) {
-				if (initResult.success) {
-					Surfly.session().startFollower(joinCode)
-						.then(function(session) {
-							// Redirect to the co-booking session URL
-							window.location.href = session.url;
-						})
-						.catch(function() {
-							document.querySelector('#joinErrorMessage').style.display = 'block';
-						});
-				} else {
-					console.log("Surfly was unable to initialize properly.");
-				}
-			});
+			Surfly.session(settings, joinCode).startFollower();
 		}
-	</script>
-
-	<script>
-		(function(s, u, r, f, l, y) {
-			s[f] = s[f] || { init: function() { s[f].q = arguments; } };
-			l = u.createElement(r);
-			y = u.getElementsByTagName(r)[0];
-			l.async = 1;
-			l.src = 'https://surfly.com/surfly.js';
-			y.parentNode.insertBefore(l, y);
-		})(window, document, 'script', 'Surfly');
 	</script>
 </body>
 </html>
