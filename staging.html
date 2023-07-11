@@ -8,7 +8,6 @@
 	<br>
 	<p>Book rooms together with your friends in real-time.</p>
 
-	
 	<!-- Join Session -->
 	<h2>Join a Co-Booking Session</h2>
 	<p>Enter the co-booking code below and click "Join" to join a co-booking session:</p>
@@ -43,11 +42,6 @@
 			}
 		});
 
-		document.querySelector('#startSessionButton').addEventListener('click', function() {
-			startSession();
-			document.querySelector('#startSessionButton').disabled = true; // Disable the button after it's clicked
-		});
-
 		document.querySelector('#joinSessionForm').addEventListener('submit', function(event) {
 			event.preventDefault();
 			joinSession();
@@ -57,7 +51,11 @@
 			var joinCode = document.querySelector('#joinSessionCodeInput').value;
 
 			// Call the .session method to join the Surfly session as a follower
-			Surfly.session(settings, "joinCode").startFollower();
+			var followerSession = Surfly.session(settings, joinCode);
+			followerSession.startFollower();
+			followerSession.on("session_error", function() {
+				document.querySelector('#joinErrorMessage').style.display = 'block';
+			});
 		}
 	</script>
 </body>
