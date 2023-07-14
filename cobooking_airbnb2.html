@@ -55,6 +55,22 @@
       cursor: pointer;
       margin-right: 20px;
     }
+    
+    #session-info {
+      font-size: 14px;
+      margin-left: 20px;
+      display: none;
+    }
+    
+    #session-info span {
+      font-weight: bold;
+    }
+    
+    #coBookingInstructions {
+      font-size: 14px;
+      margin-left: 20px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -69,14 +85,20 @@
   <!-- Add more sections and content as needed -->
 
   <footer>
-    <button class="co-booking-button" id="bookTogetherButton">Co-booking</button>
+    <button id="bookTogetherButton" class="co-booking-button">Co-Booking</button>
+    <span id="session-info"><b>Co-Booking Code: </b><span id="sessionCode"></span></span>
+
+    <div id="coBookingInstructions">
+      <p><b>Please share the following unique co-booking code with your friends whom you want to book together. No installation required!</b></p>
+      <p>Just ask them to go to Airbnb.com and scroll all the way to the bottom-right corner and click on "Join a Co-Booking Session" to enter this code!</p>
+    </div>
   </footer>
 
   <script>
     // Add your JavaScript code here
     document.querySelector('#bookTogetherButton').addEventListener('click', function() {
       startSession();
-      document.querySelector('#bookTogetherButton').disabled = true; // Disable the button after it's clicked
+      document.querySelector('#bookTogetherButton').style.display = 'none'; // Hide the button after it's clicked
     });
 
     function startSession() {
@@ -86,6 +108,7 @@
           // Display the formattedId code of the current session
           document.querySelector("#sessionCode").innerText = Surfly.listSessions()[0]._formattedId;
           document.querySelector("#session-info").style.display = "block"; // Show the session info paragraph after code retrieval
+          document.querySelector("#coBookingInstructions").style.display = "block"; // Show the co-booking instructions
         })
         .startLeader(null, { name: "", email: "" }); // You can pass the user's name and email here if needed
     }
