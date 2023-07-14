@@ -30,7 +30,31 @@
       height: auto;
     }
     
-    /* Add more styles for other elements */
+    /* Styles for the footer */
+    footer {
+      background-color: #f7f7f7;
+      padding: 20px;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+    }
+    
+    .co-booking-button {
+      padding: 10px 20px;
+      background-color: #f9c13a;
+      color: #ffffff;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 20px;
+    }
   </style>
 </head>
 <body>
@@ -44,8 +68,54 @@
 
   <!-- Add more sections and content as needed -->
 
+  <footer>
+    <button class="co-booking-button" id="bookTogetherButton">Co-booking</button>
+  </footer>
+
   <script>
-    // Add your JavaScript code here if necessary
+    // Add your JavaScript code here
+    document.querySelector('#bookTogetherButton').addEventListener('click', function() {
+      startSession();
+      document.querySelector('#bookTogetherButton').disabled = true; // Disable the button after it's clicked
+    });
+
+    function startSession() {
+      // Call the .session method to start the Surfly session
+      Surfly.session()
+        .on("session_created", function(session, event) {
+          // Display the formattedId code of the current session
+          document.querySelector("#sessionCode").innerText = Surfly.listSessions()[0]._formattedId;
+          document.querySelector("#session-info").style.display = "block"; // Show the session info paragraph after code retrieval
+        })
+        .startLeader(null, { name: "", email: "" }); // You can pass the user's name and email here if needed
+    }
+  </script>
+
+  <script>
+    (function(s, u, r, f, l, y) {
+      s[f] = s[f] || { init: function() { s[f].q = arguments; } };
+      l = u.createElement(r);
+      y = u.getElementsByTagName(r)[0];
+      l.async = 1;
+      l.src = 'https://surfly.com/surfly.js';
+      y.parentNode.insertBefore(l, y);
+    })(window, document, 'script', 'Surfly');
+
+    var settings = {
+      // Surfly session options can be set here, or at the Company/Plan levels.
+      widget_key: '9eb008187dca447685c55d80614e1d18',
+      hide_until_agent_joins: true,
+      session_start_confirmation: false,
+      url: "https://www.airbnb.com"
+    };
+
+    Surfly.init(settings, function(initResult) {
+      if (initResult.success) {
+        // API calls can now be made!
+      } else {
+        console.log("Surfly was unable to initialize properly.");
+      }
+    });
   </script>
 </body>
 </html>
