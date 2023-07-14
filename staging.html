@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Airbnb Demo</title>
+  <title>Demo for Airbnb</title>
   <style>
     /* Add your CSS styles here */
     body {
@@ -24,8 +24,70 @@
       font-size: 24px;
       margin: 0;
     }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
     
-    /* Add more styles for other elements */
+    /* Styles for the footer */
+    footer {
+      background-color: #f7f7f7;
+      padding: 20px;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+    }
+    
+    .co-booking-button {
+      padding: 10px 20px;
+      background-color: #f9c13a;
+      color: #ffffff;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+
+    #joinSessionCodeInput {
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    #joinButton {
+      padding: 10px 20px;
+      background-color: #f9c13a;
+      color: #ffffff;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    #session-info {
+      font-size: 14px;
+      margin-left: 20px;
+      display: none;
+    }
+    
+    #session-info span {
+      font-weight: bold;
+    }
+    
+    #coBookingInstructions {
+      font-size: 14px;
+      margin-left: 20px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -33,10 +95,67 @@
     <h1>Welcome to Airbnb Co-booking Integration Demo</h1>
   </header>
 
+  <div>
+    <img src="AirBnb-screenshot.png" alt="Image description">
+  </div>
+
   <!-- Add more sections and content as needed -->
 
+  <footer>
+    <button id="bookTogetherButton" class="co-booking-button">Co-Booking</button>
+    <span id="session-info"><b>Co-Booking Code: </b><span id="sessionCode"></span></span>
+
+    <div id="coBookingInstructions">
+      <p><b>Please share the following unique co-booking code with your friends whom you want to book together. No installation required!</b></p>
+      <p>Just ask them to go to Airbnb.com and scroll all the way to the bottom-right corner and click on "Join a Co-Booking Session" to enter this code!</p>
+    </div>
+
+    <div>
+      <input type="text" id="joinSessionCodeInput" placeholder="Co-Booking Code" required>
+      <button id="joinButton" onclick="joinSession()">Join</button>
+    </div>
+  </footer>
+
   <script>
-    // Add your JavaScript code here if necessary
+    // Add your JavaScript code here
+    document.querySelector('#bookTogetherButton').addEventListener('click', function() {
+      startSession();
+      document.querySelector('#bookTogetherButton').style.display = 'none'; // Hide the button after it's clicked
+    });
+
+    function startSession() {
+      // Call the .session method to start the Surfly session
+      Surfly.session()
+        .on("session_created", function(session, event) {
+          // Display the formattedId code of the current session
+          document.querySelector("#sessionCode").innerText = Surfly.listSessions()[0]._formattedId;
+          document.querySelector("#session-info").style.display = "block"; // Show the session info paragraph after code retrieval
+          document.querySelector("#coBookingInstructions").style.display = "block"; // Show the co-booking instructions
+        })
+        .startLeader(null, { name: "", email: "" }); // You can pass the user's name and email here if needed
+    }
+
+    function joinSession() {
+      var joinCode = document.querySelector('#joinSessionCodeInput').value;
+      Surfly.init(settings, function(initResult) {
+        SurflySession = Surfly.session({}, "https://surfly.com/" + joinCode).startFollower(null, null);
+      });
+    }
+  </script>
+
+  <script>
+    var SurflySession;
+    (function(s,u,r,f,l,y){s[f]=s[f]||{init:function(){s[f].q=arguments}};
+    l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
+    l.src='https://surfly.com/surfly.js';y.parentNode.insertBefore(l,y);})
+    (window,document,'script','Surfly');
+    var settings = {
+        // Surfly session options can be set here, or at the Company/Plan levels.
+        widget_key: '9eb008187dca447685c55d80614e1d18',
+        private_session: false, // to make sure only logged in agents can join the call
+        password_required: false,
+        host_switching_allowed: true
+    };
   </script>
 </body>
 </html>
