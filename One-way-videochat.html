@@ -26,39 +26,40 @@
   <br><br><b>When they do, they will turn on their videocamera to chat with you but you only need to turn on your microphone. You will get a prompt for the same from the browser, please allow it.</b></p>	
 
 	<script>
-  (function (s, u, r, f, l, y) {
-    s[f] = s[f] || { init: function () { s[f].q = arguments } };
-    l = u.createElement(r); y = u.getElementsByTagName(r)[0]; l.async = 1;
-    l.src = 'https://surfly.com/surfly.js'; y.parentNode.insertBefore(l, y);
-  })(window, document, 'script', 'Surfly');
+		(function(s,u,r,f,l,y){
+			s[f]=s[f]||{init:function(){s[f].q=arguments}};
+			l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
+			l.src='https://surfly.com/surfly.js';y.parentNode.insertBefore(l,y);
+		})(window,document,'script','Surfly');
 
-  var settings = {
-    widget_key: '9eb008187dca447685c55d80614e1d18',
-    videochat_autostart: true,
-    videochat_prompt: false,
-    videochat_start_fullscreen: true
-  };
+		var settings = {
+			// Surfly session options can be set here, or at the Company/Plan levels.
+			widget_key: 'e7b84f22219448d0b9eb946a0bbdb1dd',
+			hide_until_agent_joins: true,
+			session_start_confirmation: false,
+			url: "https://www.flipkart.com"
+		};
 
-  Surfly.init(settings, function (initResult) {
-    if (initResult.success) {
-      console.log('All good for happy cobrowsing!');
+        // Surfly.init() must be called before any other API call
+        Surfly.init(settings, function(init) {
+        	if (init.success && !Surfly.isInsideSession) {
+	            Surfly.session()
+	            .on("session_created", function(session, event) {
+	                // display the PIN of the current session
+	                // document.querySelector("#sessidtarget").innerText = session.pin;
+	            })
+	            .startLeader();
 
-      // it is now safe to use API
-      if (!Surfly.isInsideSession) {
-        Surfly.session({ docked_only: true }).startLeader();
-        Surfly.on('session_loaded', function (session) {
-          setTimeout(() => {
-            console.log("session_loaded");
-            session.toggleVideochatMicrophone();
-            session.toggleVideochatMicrophone();
-          }, 5000);
+	            Surfly.on('session_loaded', function(session) {
+	              	setTimeout(() => {
+	                	console.log("session_loaded");
+	                	session.toggleVideochatMicrophone();
+	                	session.toggleVideochatMicrophone();
+	              	}, 5000);
+	            });
+        	}
         });
-      }
-    } else {
-      console.log('Your browser lacks features required by Surfly');
-    }
-  });
-</script>
+	</script>
 
 
 	</body>
