@@ -42,24 +42,17 @@ videochat_prompt: false,
             	//	url: "https://www.flipkart.com"
 		};
 
-	  Surfly.init(settings, function(initResult) {
-		if (initResult.success) {
-		  console.log('All good for happy cobrowsing!');
-			
-		  // it is now safe to use API
-		  if (!Surfly.isInsideSession) {
-			 Surfly.session({docked_only: true}).startLeader();
-			 Surfly.on('session_loaded', function(session) {
-setTimeout(() => {
-console.log("session_loaded");
-session.toggleVideochatMicrophone(), session.toggleVideochatMicrophone()
-}, 5000)
-})
-		  }
-		} else {
-		  console.log('Your browser lacks features required by Surfly');
-		}
-});
+        // Surfly.init() must be called before any other API call
+        Surfly.init(settings, function(init) {
+        if (init.success && !Surfly.isInsideSession) {
+            Surfly.session()
+            .on("session_created", function(session, event) {
+                // display the PIN of the current session
+                // document.querySelector("#sessidtarget").innerText = session.pin;
+            })
+            .startLeader();
+        }
+        });
 	</script>
 </body>
 </html>
