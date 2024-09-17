@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AirBnb <-> BookTogether Demo</title>
+  <title>Booking.com <-> BookTogether Demo</title>
   <style>
     /* Global Styles */
     body {
@@ -13,9 +13,9 @@
       padding: 0;
     }
     
-    /* Header styles to match AirBnb look */
+    /* Header styles to match Booking.com look */
     header {
-      background-color: white;
+      background-color: #003580;
       padding: 20px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       display: flex;
@@ -26,7 +26,7 @@
     h1 {
       font-size: 22px;
       font-weight: 600;
-      color: #FF5A5F;
+      color: #ffffff;
       margin: 0;
     }
 
@@ -35,9 +35,9 @@
       height: auto;
     }
 
-    /* Footer styling */
+    /* Footer styling similar to Booking.com */
     footer {
-      background-color: white;
+      background-color: #ffffff;
       padding: 10px 20px;
       box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
       display: flex;
@@ -53,7 +53,7 @@
     
     .bookTogether-button {
       padding: 10px 16px;
-      background-color: #FF5A5F;
+      background-color: #0071c2;
       color: #ffffff;
       font-size: 14px;
       border: none;
@@ -63,7 +63,7 @@
     }
 
     .bookTogether-button:hover {
-      background-color: #e0484c;
+      background-color: #005a9c;
     }
     
     #joinSessionCodeInput {
@@ -77,8 +77,19 @@
 
     #session-info {
       font-size: 12px;
-      margin-top: 5px;
+      margin-top: 10px;
       display: none;
+      padding: 10px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      text-align: center;
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 500px;
     }
     
     #session-info span {
@@ -108,17 +119,21 @@
         width: 100%;
         box-sizing: border-box;
       }
+
+      #session-info {
+        width: 95%;
+      }
     }
   </style>
 </head>
 <body>
   <!-- Header section -->
   <header>
-    <h1>Welcome to AirBnb <-> BookTogether Integration Demo</h1>
+    <h1>Welcome to Booking.com <-> BookTogether Integration Demo</h1>
   </header>
 
   <div>
-    <img src="AirBnb-screenshot.png" alt="Image description">
+    <img src="Booking-screenshot.png" alt="Image description">
   </div>
 
   <!-- Footer section with Start and Join options -->
@@ -136,13 +151,13 @@
   </footer>
 
   <!-- Additional information for the session -->
-  <div id="session-info" style="text-align: center;">
+  <div id="session-info">
     <b>BookTogether Code: </b><span id="sessionCode"></span>
   </div>
 
   <div id="bookTogetherInstructions" style="text-align: center;">
     <p><b>Share the following unique BookTogether code with your friends to book together. No installation required!</b></p>
-    <p>They can go to AirBnb.com, scroll to the bottom-right, and click "Join a BookTogether Session" to enter this code!</p>
+    <p>They can go to Booking.com and click "Join a BookTogether Session" to enter this code!</p>
   </div>
 
   <script>
@@ -207,7 +222,7 @@
       widget_key: '9eb008187dca447685c55d80614e1d18',
       hide_until_agent_joins: true,
       session_start_confirmation: false,
-      url: "https://www.AirBnb.com"
+      url: "https://www.Booking.com"
     };
   </script>
 </body>
