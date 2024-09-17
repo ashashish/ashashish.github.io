@@ -47,7 +47,7 @@
       z-index: 100;
     }
     
-    .co-booking-button {
+    .bookTogether-button {
       padding: 10px 20px;
       background-color: #f9c13a;
       color: #ffffff;
@@ -58,7 +58,7 @@
       margin: 10px;
     }
 
-    .co-booking-button:hover {
+    .bookTogether-button:hover {
       background-color: #e0a729;
     }
     
@@ -80,7 +80,7 @@
       font-weight: bold;
     }
     
-    #coBookingInstructions {
+    #bookTogetherInstructions {
       font-size: 14px;
       margin-top: 10px;
       display: none;
@@ -92,7 +92,7 @@
       footer {
         flex-direction: column;
       }
-      .co-booking-button, #joinSessionCodeInput {
+      .bookTogether-button, #joinSessionCodeInput {
         width: 100%;
         box-sizing: border-box;
       }
@@ -101,7 +101,7 @@
 </head>
 <body>
   <header>
-    <h1>Welcome to AirBnb Co-booking Integration Demo</h1>
+    <h1>Welcome to AirBnb <-> BookTogether Integration Demo</h1>
   </header>
 
   <div>
@@ -109,29 +109,32 @@
   </div>
 
   <footer>
-    <button id="bookTogetherButton" class="co-booking-button">Start Co-Booking</button>
+    <!-- Start BookTogether button -->
+    <button id="bookTogetherButton" class="bookTogether-button">Start BookTogether</button>
 
-    <div id="joinSessionContainer" style="display: none;">
-      <input type="text" id="joinSessionCodeInput" placeholder="Enter Co-Booking Code" required>
-      <button id="joinSessionButton" class="co-booking-button">Join</button>
+    <!-- Join BookTogether session code input and button -->
+    <div>
+      <input type="text" id="joinSessionCodeInput" placeholder="Enter BookTogether Code" required>
+      <button id="joinSessionButton" class="bookTogether-button">Join a BookTogether Session</button>
     </div>
 
-    <div id="session-info"><b>Co-Booking Code: </b><span id="sessionCode"></span></div>
+    <!-- Session info and instructions -->
+    <div id="session-info"><b>BookTogether Code: </b><span id="sessionCode"></span></div>
 
-    <div id="coBookingInstructions">
-      <p><b>Share the following unique co-booking code with your friends to book together. No installation required!</b></p>
-      <p>They can go to AirBnb.com, scroll to the bottom-right, and click "Join a Co-Booking Session" to enter this code!</p>
+    <div id="bookTogetherInstructions">
+      <p><b>Share the following unique BookTogether code with your friends to book together. No installation required!</b></p>
+      <p>They can go to AirBnb.com, scroll to the bottom-right, and click "Join a BookTogether Session" to enter this code!</p>
     </div>
   </footer>
 
   <script>
-    // Show join session input once session is started
+    // Start BookTogether session
     document.querySelector('#bookTogetherButton').addEventListener('click', function() {
       startSession();
-      document.querySelector('#bookTogetherButton').style.display = 'none'; // Hide the button after it's clicked
-      document.querySelector('#joinSessionContainer').style.display = 'flex'; // Show join session container
+      document.querySelector('#bookTogetherButton').style.display = 'none'; // Hide start button after session starts
     });
 
+    // Join BookTogether session
     document.querySelector('#joinSessionButton').addEventListener('click', function() {
       joinSession();
     });
@@ -145,7 +148,7 @@
               const sessionCode = Surfly.listSessions()[0]._formattedId;
               document.querySelector("#sessionCode").innerText = sessionCode;
               document.querySelector("#session-info").style.display = "block"; // Show session info after code retrieval
-              document.querySelector("#coBookingInstructions").style.display = "block"; // Show the co-booking instructions
+              document.querySelector("#bookTogetherInstructions").style.display = "block"; // Show the BookTogether instructions
             })
             .startLeader(null, { name: "", email: "" }); // You can pass the user's name and email here if needed
         } else {
@@ -157,7 +160,7 @@
     function joinSession() {
       const joinCode = document.querySelector('#joinSessionCodeInput').value.trim();
       if (!joinCode) {
-        alert("Please enter a valid Co-Booking Code.");
+        alert("Please enter a valid BookTogether Code.");
         return;
       }
 
