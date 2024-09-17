@@ -1,10 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo for AirBnb</title>
+  <style>
+    /* Add your CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Customize styles for different sections */
+    header {
+      background-color: #ffffff;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 24px;
+      margin: 0;
+    }
 
-<!doctype html>
-<html>
-  <head>
-    <title>Main Page</title>
-  </head>
-  <body>
-    <h1>Testing & Demos...</h1>
-  </body>
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* Styles for the footer */
+    footer {
+      background-color: #f7f7f7;
+      padding: 20px;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+    }
+    
+    .co-booking-button {
+      padding: 10px 20px;
+      background-color: #f9c13a;
+      color: #ffffff;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    .co-booking-button:hover {
+      background-color: #e0a729;
+    }
+    
+    #joinSessionCodeInput {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin: 10px;
+    }
+
+    #session-info {
+      font-size: 14px;
+      margin: 10px;
+      display: none;
+    }
+    
+    #session-info span {
+      font-weight: bold;
+    }
+    
+    #coBookingInstructions {
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      footer {
+        flex-direction: column;
+      }
+      .co-booking-button, #joinSessionCodeInput {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to AirBnb Co-booking Integration Demo</h1>
+  </header>
+
+  <div>
+    <img src="AirBnb-screenshot.png" alt="Image description">
+  </div>
+
+  <footer>
+    <button id="bookTogetherButton" class="co-booking-button">Start Co-Booking</button>
+
+    <div id="joinSessionContainer" style="display: none;">
+      <input type="text" id="joinSessionCodeInput" placeholder="Enter Co-Booking Code" required>
+      <button id="joinSessionButton" class="co-booking-button">Join</button>
+    </div>
+
+    <div id="session-info"><b>Co-Booking Code: </b><span id="sessionCode"></span></div>
+
+    <div id="coBookingInstructions">
+      <p><b>Share the following unique co-booking code with your friends to book together. No installation required!</b></p>
+      <p>They can go to AirBnb.com, scroll to the bottom-right, and click "Join a Co-Booking Session" to enter this code!</p>
+    </div>
+  </footer>
+
+  <script>
+    // Show join session input once session is started
+    document.querySelector('#bookTogetherButton').addEventListener('click', function() {
+      startSession();
+      document.querySelector('#bookTogetherButton').style.display = 'none'; // Hide the button after it's clicked
+      document.querySelector('#joinSessionContainer').style.display = 'flex'; // Show join session container
+    });
+
+    document.querySelector('#joinSessionButton').addEventListener('click', function() {
+      joinSession();
+    });
+
+    function startSession() {
+      Surfly.init(settings, function(initResult) {
+        if (initResult.success) {
+          Surfly.session()
+            .on("session_created", function(session, event) {
+              // Display the formattedId code of the current session
+              const sessionCode = Surfly.listSessions()[0]._formattedId;
+              document.querySelector("#sessionCode").innerText = sessionCode;
+              document.querySelector("#session-info").style.display = "block"; // Show session info after code retrieval
+              document.querySelector("#coBookingInstructions").style.display = "block"; // Show the co-booking instructions
+            })
+            .startLeader(null, { name: "", email: "" }); // You can pass the user's name and email here if needed
+        } else {
+          console.log("Surfly was unable to initialize properly.");
+        }
+      });
+    }
+
+    function joinSession() {
+      const joinCode = document.querySelector('#joinSessionCodeInput').value.trim();
+      if (!joinCode) {
+        alert("Please enter a valid Co-Booking Code.");
+        return;
+      }
+
+      Surfly.init(settings, function(initResult) {
+        if (initResult.success) {
+          Surfly.session({}, "https://surfly.com/" + joinCode).startFollower(null, null);
+        } else {
+          console.log("Surfly was unable to initialize properly.");
+        }
+      });
+    }
+  </script>
+
+  <script>
+    (function(s, u, r, f, l, y) {
+      s[f] = s[f] || { init: function() { s[f].q = arguments; } };
+      l = u.createElement(r);
+      y = u.getElementsByTagName(r)[0];
+      l.async = 1;
+      l.src = 'https://surfly.com/surfly.js';
+      y.parentNode.insertBefore(l, y);
+    })(window, document, 'script', 'Surfly');
+
+    var settings = {
+      // Surfly session options can be set here, or at the Company/Plan levels.
+      widget_key: '9eb008187dca447685c55d80614e1d18',
+      hide_until_agent_joins: true,
+      session_start_confirmation: false,
+      url: "https://www.AirBnb.com"
+    };
+  </script>
+</body>
 </html>
