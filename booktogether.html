@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking.com <-> BookTogether Demo</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Header styles to match Booking.com look */
+    header {
+      background-color: #003580;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Footer styling similar to Booking.com */
+    footer {
+      background-color: #ffffff;
+      padding: 10px 20px;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      z-index: 100;
+    }
+    
+    .bookTogether-button {
+      padding: 10px 16px;
+      background-color: #0071c2;
+      color: #ffffff;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    .bookTogether-button:hover {
+      background-color: #005a9c;
+    }
+    
+    #joinSessionCodeInput {
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 8px;
+      width: 160px;
+    }
+
+    #session-info {
+      font-size: 12px;
+      margin-top: 10px;
+      display: none;
+      padding: 10px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      position: fixed;
+      bottom: 80px;
+      left: 20px; /* Changed to left align */
+      width: auto;
+    }
+    
+    #session-info span {
+      font-weight: bold;
+    }
+    
+    #bookTogetherInstructions {
+      font-size: 12px;
+      margin-top: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    #copyButton {
+      padding: 6px;
+      margin-left: 5px;
+      cursor: pointer;
+      background-color: #0071c2;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+
+    #copyButton:hover {
+      background-color: #005a9c;
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      footer {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+      }
+
+      #joinSessionContainer {
+        margin-top: 10px;
+      }
+
+      .bookTogether-button, #joinSessionCodeInput {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      #session-info {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header section -->
+  <header>
+    <h1>Welcome to Booking.com <-> BookTogether Integration Demo</h1>
+  </header>
+
+  <div>
+    <img src="booking-screenshot.png" alt="Booking.com screenshot">
+  </div>
+
+  <!-- Footer section with Start and Join options -->
+  <footer>
+    <!-- Start BookTogether button -->
+    <div>
+      <button id="bookTogetherButton" class="bookTogether-button">Start BookTogether</button>
+    </div>
+
+    <!-- Join BookTogether session code input and button -->
+    <div id="joinSessionContainer" style="position: relative; right: 40px;">
+      <input type="text" id="joinSessionCodeInput" placeholder="Enter BookTogether Code" required>
+      <button id="joinSessionButton" class="bookTogether-button">Join</button>
+    </div>
+  </footer>
+
+  <!-- Additional information for the session -->
+  <div id="session-info">
+    <b>BookTogether Code: </b><span id="sessionCode"></span>
+    <button id="copyButton">Copy</button>
+  </div>
+
+  <div id="bookTogetherInstructions" style="text-align: center;">
+    <p><b>Share the following unique BookTogether code with your friends to book together. No installation required!</b></p>
+    <p>They can go to Booking.com and click "Join a BookTogether Session" to enter this code!</p>
+  </div>
+
+  <script>
+    // Start BookTogether session
+    document.querySelector('#bookTogetherButton').addEventListener('click', function() {
+      startSession();
+      document.querySelector('#bookTogetherButton').style.display = 'none'; // Hide start button after session starts
+    });
+
+    // Join BookTogether session
+    document.querySelector('#joinSessionButton').addEventListener('click', function() {
+      joinSession();
+    });
+
+    // Copy the session code to clipboard
+    document.querySelector('#copyButton').addEventListener('click', function() {
+      const sessionCode = document.querySelector('#sessionCode').innerText;
+      navigator.clipboard.writeText(sessionCode).then(function() {
+        alert("BookTogether code copied to clipboard!");
+      }, function(err) {
+        console.error('Could not copy text: ', err);
+      });
+    });
+
+    function startSession() {
+      Surfly.init(settings, function(initResult) {
+        if (initResult.success) {
+          Surfly.session()
+            .on("session_created", function(session, event) {
+              // Display the formattedId code of the current session
+              const sessionCode = Surfly.listSessions()[0]._formattedId;
+              document.querySelector("#sessionCode").innerText = sessionCode;
+              document.querySelector("#session-info").style.display = "block"; // Show session info after code retrieval
+              document.querySelector("#bookTogetherInstructions").style.display = "block"; // Show the BookTogether instructions
+            })
+            .startLeader(null, { name: "", email: "" }); // You can pass the user's name and email here if needed
+        } else {
+          console.log("Surfly was unable to initialize properly.");
+        }
+      });
+    }
+
+    function joinSession() {
+      const joinCode = document.querySelector('#joinSessionCodeInput').value.trim();
+      if (!joinCode) {
+        alert("Please enter a valid BookTogether Code.");
+        return;
+      }
+
+      Surfly.init(settings, function(initResult) {
+        if (initResult.success) {
+          Surfly.session({}, "https://surfly.com/" + joinCode).startFollower(null, null);
+        } else {
+          console.log("Surfly was unable to initialize properly.");
+        }
+      });
+    }
+  </script>
+
+  <script>
+    (function(s, u, r, f, l, y) {
+      s[f] = s[f] || { init: function() { s[f].q = arguments; } };
+      l = u.createElement(r);
+      y = u.getElementsByTagName(r)[0];
+      l.async = 1;
+      l.src = 'https://surfly.com/surfly.js';
+      y.parentNode.insertBefore(l, y);
+    })(window, document, 'script', 'Surfly');
+
+    var settings = {
+      // Surfly session options can be set here, or at the Company/Plan levels.
+      widget_key: '9eb008187dca447685c55d80614e1d18',
+      hide_until_agent_joins: true,
+      session_start_confirmation: false,
+      videochat_enabled: false,
+      chat_enabled: false,
+      new_urls_allowed: false,
+      non_hosts_can_open_tabs: false,
+      screensharing_enabled: false,
+      filesharing_enabled: false,
+      blocklist: "[]",
+      allowlist: "[]",
+      pause_enabled: false,
+      participants_can_request_to_interact: false,
+      start_with_loading_screen: false,
+      anyone_can_deactivate_space: true,
+      alternative_proxy_enabled: true,
+      use_residential_proxy: true,
+      url: "https://www.Booking.com"
+    };
+  </script>
+</body>
+</html>
