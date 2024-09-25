@@ -56,10 +56,10 @@
     <form action="/process_payment" method="POST">
         <label for="cardholder-name">Cardholder Name</label>
         <input type="text" id="cardholder-name" name="cardholder_name" required>
-
+        <div>
         <label for="card-number">Card Number</label>
         <input type="tel" id="card-number" name="card_number" pattern="[0-9\s]{13,19}" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" required>
-
+        </div>
         <label for="expiry-date">Expiry Date</label>
         <input type="text" id="expiry-date" name="expiry_date" placeholder="MM/YY" required>
 
