@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        .payment-form {
+            width: 400px;
+            margin: 50px auto;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+        .payment-form h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .payment-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .payment-form input[type="text"],
+        .payment-form input[type="email"],
+        .payment-form input[type="tel"],
+        .payment-form input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .payment-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .payment-form button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="payment-form">
+    <h2>Payment Information</h2>
+    <form action="/process_payment" method="POST">
+        <label for="cardholder-name">Cardholder Name</label>
+        <input type="text" id="cardholder-name" name="cardholder_name" required>
+
+        <label for="card-number">Card Number</label>
+        <input type="tel" id="card-number" name="card_number" pattern="[0-9\s]{13,19}" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" required>
+
+        <label for="expiry-date">Expiry Date</label>
+        <input type="text" id="expiry-date" name="expiry_date" placeholder="MM/YY" required>
+
+        <label for="cvv">CVV</label>
+        <input type="number" id="cvv" name="cvv" maxlength="4" required>
+
+        <button type="submit">Pay Now</button>
+    </form>
+</div>
+
+</body>
+</html>
