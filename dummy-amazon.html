@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout - Your Online Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaeded;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #131921;
+            padding: 10px 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .header img {
+            width: 100px;
+            margin-right: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .cart-items, .customer-info, .payment-methods {
+            margin-bottom: 30px;
+        }
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+        .cart-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-right: 20px;
+        }
+        .item-details {
+            flex-grow: 1;
+        }
+        .item-details h4 {
+            margin: 0 0 10px 0;
+            color: #007185;
+        }
+        .item-details p {
+            margin: 5px 0;
+        }
+        .price {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .customer-info, .payment-methods {
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+        .address, .payment-option {
+            margin-bottom: 15px;
+        }
+        .payment-option label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .payment-option input {
+            margin-right: 10px;
+        }
+        .payment-option img {
+            height: 20px;
+            margin-right: 10px;
+        }
+        .btn {
+            background-color: #f0c14b;
+            color: #111;
+            padding: 12px 20px;
+            border: 1px solid #a88734;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #e2b33c;
+        }
+        .total-price {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .change-button {
+            background: none;
+            border: none;
+            color: #007185;
+            cursor: pointer;
+            padding: 0;
+            font-size: 14px;
+        }
+        .change-button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <!-- Placeholder for the company logo -->
+        <img src="https://via.placeholder.com/100x30?text=Logo" alt="Company Logo">
+        <h1>Your Online Store</h1>
+    </div>
+
+    <div class="container">
+        <h2>Checkout</h2>
+
+        <!-- Cart Items -->
+        <div class="cart-items">
+            <h3>Items in Your Cart</h3>
+
+            <!-- Item 1 -->
+            <div class="cart-item">
+                <img src="https://via.placeholder.com/150?text=Wireless+Headphones" alt="Wireless Headphones">
+                <div class="item-details">
+                    <h4>Wireless Headphones</h4>
+                    <p>Color: Black</p>
+                    <p>Quantity: 1</p>
+                    <p class="price">$59.99</p>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="cart-item">
+                <img src="https://via.placeholder.com/150?text=Smart+Fitness+Watch" alt="Smart Fitness Watch">
+                <div class="item-details">
+                    <h4>Smart Fitness Watch</h4>
+                    <p>Color: Gray</p>
+                    <p>Quantity: 1</p>
+                    <p class="price">$129.99</p>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="cart-item">
+                <img src="https://via.placeholder.com/150?text=Echo+Dot+Smart+Speaker" alt="Echo Dot Smart Speaker">
+                <div class="item-details">
+                    <h4>Smart Speaker</h4>
+                    <p>Color: White</p>
+                    <p>Quantity: 2</p>
+                    <p class="price">$49.98</p>
+                </div>
+            </div>
+
+            <!-- Total Price -->
+            <div class="total-price">
+                Total: $239.96
+            </div>
+        </div>
+
+        <!-- Customer Information -->
+        <div class="customer-info">
+            <h3>Shipping Address</h3>
+            <div class="address">
+                <p><strong>John Doe</strong></p>
+                <p>123 Main Street</p>
+                <p>Apt. 4B</p>
+                <p>Springfield, IL 62704</p>
+                <p>United States</p>
+                <p>Phone: (555) 123-4567</p>
+                <button class="change-button">Change Address</button>
+            </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="payment-methods">
+            <h3>Payment Methods</h3>
+            <form>
+                <!-- Credit Card Option 1 -->
+                <div class="payment-option">
+                    <label>
+                        <input type="radio" name="payment-method" value="card1" checked>
+                        <img src="https://via.placeholder.com/40x20?text=Visa" alt="Visa">
+                        <div>
+                            <p>Visa Ending in 1234</p>
+                            <p>Expires 12/2024</p>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Credit Card Option 2 -->
+                <div class="payment-option">
+                    <label>
+                        <input type="radio" name="payment-method" value="card2">
+                        <img src="https://via.placeholder.com/40x20?text=Mastercard" alt="Mastercard">
+                        <div>
+                            <p>Mastercard Ending in 5678</p>
+                            <p>Expires 08/2023</p>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Bank Account Option -->
+                <div class="payment-option">
+                    <label>
+                        <input type="radio" name="payment-method" value="bank">
+                        <img src="https://via.placeholder.com/40x20?text=Bank" alt="Bank">
+                        <div>
+                            <p>Bank Account: **** **** **** 9876</p>
+                            <p>Routing Number: *****0123</p>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Add New Payment Method -->
+                <button type="button" class="change-button">Add New Payment Method</button>
+            </form>
+        </div>
+
+        <!-- Place Order Button -->
+        <button class="btn">Place Your Order</button>
+    </div>
+</body>
+</html>
