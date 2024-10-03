@@ -12,62 +12,88 @@
         html,
         body {
             min-height: 100vh;
-            min-width: 100vw;
             padding: 0;
             margin: 0;
             box-sizing: border-box;
-            background-color: white;
             font-family: "Open Sans", sans-serif;
+            display: flex;
+        }
+
+        .left-half {
+            width: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image {
+            height: 100vh;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .right-half {
+            width: 50%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         h1 {
             font-size: 1.5em;
             text-align: center;
-            margin-top: 20px;
-        }
-
-        .container {
-            width: 90%;
-            margin: auto;
-            max-width: 800px;
-        }
-
-        .image-placeholder {
-            width: 100%;
-            height: 150px;
-            background-color: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
-            border: 1px solid #ccc;
         }
 
         .tandc-box {
-            height: 200px;
+            height: 250px;
             overflow-y: scroll;
             padding: 10px;
             border: 1px solid #ddd;
             background-color: #f9f9f9;
             font-size: 0.9em;
         }
+
+        .code-box {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #eee;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>BY SHARING THE 4-DIGIT CODE BELOW WITH THE AGENT, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTAND, AND AGREE TO THESE TERMS AND CONDITIONS</h1>
+    <div class="left-half">
+        <img src="https://via.placeholder.com/800x1000" alt="Image Placeholder" class="image">
+    </div>
 
-        <div class="image-placeholder">
-            <!-- Image Placeholder -->
-            <p>Image goes here</p>
-        </div>
+    <div class="right-half">
+        <h1>BY SHARING THE 4-DIGIT CODE BELOW WITH THE AGENT, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTAND, AND AGREE TO THESE TERMS AND CONDITIONS</h1>
 
         <div class="tandc-box">
             <p>Co-Browsing Session Terms and Conditions...</p>
-            Co-Browsing Session Terms and Conditions 1. Introduction. By participating in a co-browsing session with a [Corpay, Inc.] (hereinafter "Corpay" or "Company") customer service representative ("Representative"), you agree to the following terms and conditions. If you do not agree, please do not proceed with the co-browsing session. 2. Purpose of Co-Browsing. Co-browsing is a tool that allows a [Corpay] Representative to view and interact with your web browser in real-time. This is intended to assist you in navigating the driven.fleet-account.com website. 3. Scope of Access. The Representative will have access only to the browser window you share during the co-browsing session. They will not have access to other tabs, windows, applications, files, folders, or personal data on your device. You retain full control during the session and can end the co-browsing session at any time by clicking End Session. 4. Information Shared During Co-Browsing. During the session, the Representative will see information displayed in the shared browser window. However, personal information, such as passwords, account numbers, and routing numbers will be masked. During the co-browsing session, you agree not to provide, share or display any personal or sensitive information (e.g., passwords, account numbers, routing numbers). The Representative will not ask for such information during the co-browsing session. 5. Privacy and Data Protection.[Corpay] values your privacy and will use the information viewed during the co-browsing session solely for the purpose of assisting you with navigating our website. The co-browsing session may be recorded for quality assurance and training purposes, and you expressly agree to such recording. The Company's privacy policy ("Privacy Policy") is available on the Company's website. The Privacy Policy provides you with information about how the Company collects, uses, and shares personal information. It also describes choices and rights available to you regarding your personal information. By agreeing to these terms, you consent to the collection, use, and storage of your data as described herein and in the Privacy Policy. 6. Liability. [Corpay] will not be liable for any loss or damage that may arise directly or indirectly from the co-browsing session, except where caused by [Corpay]’s gross negligence or willful misconduct. You are responsible for ensuring that any sensitive or confidential information is not shared or displayed during the session. 7. Termination of Session. You or the Representative may terminate the co-browsing session at any time. [Corpay] reserves the right to terminate the session if inappropriate content is displayed or if the session is being used for purposes other than its intended use. 8. Governing Law. These terms and conditions are governed by the laws of [Jurisdiction], without regard to its conflict of law principles. 9. Contact Information. If you have any questions or concerns regarding these terms and conditions, please contact [Corpay] at [Contact Information]. By sharing the 4 digit code with the agent, you acknowledge that you have read, understood, and agree to these Terms and Conditions.
+            <!-- Insert terms and conditions text here -->
+        </div>
+
+        <div class="code-box" id="codeBox">
+            4-digit code: <span id="code">XXXX</span>
         </div>
     </div>
+
+    <script>
+        // Function to generate a random 4-digit code
+        function generateCode() {
+            const code = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('code').textContent = code;
+        }
+
+        // Generate code on page load
+        window.onload = generateCode;
+    </script>
 </body>
 
 </html>
