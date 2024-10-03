@@ -45,6 +45,13 @@
             text-align: center;
         }
 
+        .tandc-notice {
+            font-size: 1em;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
         .tandc-box {
             height: 250px;
             overflow-y: scroll;
@@ -62,6 +69,13 @@
             border: 1px solid #ccc;
             background-color: #eee;
         }
+
+        .waiting-message {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1em;
+            color: #888;
+        }
     </style>
 </head>
 
@@ -71,14 +85,23 @@
     </div>
 
     <div class="right-half">
-        <h1>BY SHARING THE 4-DIGIT CODE BELOW WITH THE AGENT, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTAND, AND AGREE TO THESE TERMS AND CONDITIONS</h1>
+        <h1>Your 4-Digit Session Code</h1>
+
+        <div class="code-box">
+            4-digit code: <b><span id="sessidtarget">...</span></b>
+        </div>
+
+        <div class="waiting-message">
+            Waiting for Agent to join!
+        </div>
+
+        <div class="tandc-notice">
+            BY SHARING THE 4-DIGIT CODE BELOW WITH THE AGENT, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTAND, AND AGREE TO THESE TERMS AND CONDITIONS
+        </div>
 
         <div class="tandc-box">
             <p>Co-Browsing Session Terms and Conditions...</p>
-        </div>
-
-        <div class="code-box">
-            Your 4-digit code: <b><span id="sessidtarget">...</span></b>
+            <!-- Insert terms and conditions text here -->
         </div>
     </div>
 
@@ -93,7 +116,7 @@
         var settings = {
             widget_key: "9eb008187dca447685c55d80614e1d18", 
             hide_until_agent_joins: true,
-            url: "https://www.flipkart.com"
+            url: "https://google.com"
         };
 
         // Initialize Surfly and handle session creation
