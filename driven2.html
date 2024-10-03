@@ -16,10 +16,14 @@
             box-sizing: border-box;
             font-family: "Open Sans", sans-serif;
             display: flex;
+            flex-direction: row;
+        }
+
+        .left-half, .right-half {
+            width: 50%;
         }
 
         .left-half {
-            width: 50%;
             background-color: #f0f0f0;
             display: flex;
             align-items: center;
@@ -27,13 +31,12 @@
         }
 
         .image {
-            height: 100vh;
+            height: 100%;
             width: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .right-half {
-            width: 50%;
             padding: 20px;
             display: flex;
             flex-direction: column;
@@ -68,6 +71,38 @@
             margin-top: 10px;
             font-size: 1em;
             color: #888;
+        }
+
+        /* Media Query for Mobile */
+        @media (max-width: 768px) {
+            html, body {
+                flex-direction: column;
+            }
+
+            .left-half, .right-half {
+                width: 100%;
+            }
+
+            .right-half {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.2em;
+            }
+
+            .tandc-box {
+                height: 200px;
+                font-size: 0.85em;
+            }
+
+            .code-box {
+                font-size: 1em;
+            }
+
+            .waiting-message {
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
