@@ -6,11 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
-    <title>Landing page</title>
+    <title>Landing page with Surfly PIN</title>
 
     <style type='text/css'>
-        html,
-        body {
+        html, body {
             min-height: 100vh;
             padding: 0;
             margin: 0;
@@ -76,23 +75,38 @@
 
         <div class="tandc-box">
             <p>Co-Browsing Session Terms and Conditions...</p>
-            <!-- Insert terms and conditions text here -->
         </div>
 
-        <div class="code-box" id="codeBox">
-            4-digit code: <span id="code">XXXX</span>
+        <div class="code-box">
+            Your 4-digit code: <b><span id="sessidtarget">...</span></b>
         </div>
     </div>
 
     <script>
-        // Function to generate a random 4-digit code
-        function generateCode() {
-            const code = Math.floor(1000 + Math.random() * 9000);
-            document.getElementById('code').textContent = code;
-        }
+        // Surfly snippet
+        (function(s,u,r,f,l,y){s[f]=s[f]||{init:function(){s[f].q=arguments}};
+        l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
+        l.src='https://surfly.com/surfly.js';y.parentNode.insertBefore(l,y);})
+        (window,document,'script','Surfly');
 
-        // Generate code on page load
-        window.onload = generateCode;
+        // Surfly settings
+        var settings = {
+            widget_key: "b7de6b8a6aa24e6c9014d9fe3e23fd3a", 
+            hide_until_agent_joins: true,
+            url: "https://www.flipkart.com"
+        };
+
+        // Initialize Surfly and handle session creation
+        Surfly.init(settings, function(init) {
+            if (init.success && !Surfly.isInsideSession) {
+                Surfly.session()
+                .on("session_created", function(session, event) {
+                    // Display the PIN of the current session
+                    document.querySelector("#sessidtarget").innerText = session.pin;
+                })
+                .startLeader();
+            }
+        });
     </script>
 </body>
 
