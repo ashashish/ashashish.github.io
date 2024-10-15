@@ -62,8 +62,9 @@
             margin-top: 20px;
             font-size: 1.2em;
             padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #eee;
+            border: 1px solid #4CAF50;
+            background-color: #4CAF50;
+            color: white;
             display: none; /* Initially hidden */
         }
 
@@ -166,15 +167,11 @@
         l.src='https://surfly.com/surfly.js';y.parentNode.insertBefore(l,y);})
         (window,document,'script','Surfly');
 
-        // Surfly settings
-        var settings = {
-            widget_key: "9eb008187dca447685c55d80614e1d18", 
-            hide_until_agent_joins: true,
-            url: "https://driven.fleet-account.com/"
-        };
-
         // Handle button click
         document.getElementById('acceptButton').addEventListener('click', function() {
+            // Hide the button after click
+            document.getElementById('acceptButton').style.display = 'none';
+
             // Initialize Surfly and handle session creation
             Surfly.init(settings, function(init) {
                 if (init.success && !Surfly.isInsideSession) {
