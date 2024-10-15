@@ -40,7 +40,7 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
         }
 
         h1 {
@@ -62,8 +62,10 @@
             margin-top: 20px;
             font-size: 1.2em;
             padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #eee;
+            border: 1px solid #4CAF50;
+            background-color: #4CAF50;
+            color: white;
+            display: none; /* Initially hidden */
         }
 
         .waiting-message {
@@ -71,6 +73,7 @@
             margin-top: 10px;
             font-size: 1em;
             color: #888;
+            display: none; /* Initially hidden */
         }
 
         /* Media Query for Mobile */
@@ -85,6 +88,8 @@
 
             .right-half {
                 padding: 15px;
+                height: 100vh;
+                justify-content: flex-start;
             }
 
             h1 {
@@ -92,17 +97,38 @@
             }
 
             .tandc-box {
-                height: 200px;
+                height: 150px;
                 font-size: 0.85em;
             }
 
             .code-box {
-                font-size: 1em;
+                font-size: 1.2em;
+                margin-top: 10px;
             }
 
             .waiting-message {
-                font-size: 0.9em;
+                font-size: 1em;
             }
+
+            .accept-button {
+                margin-top: 15px;
+            }
+        }
+
+        .accept-button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .accept-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -116,21 +142,56 @@
         <h1>BY SHARING THE 4-DIGIT PINCODE BELOW WITH THE AGENT, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTAND, AND AGREE TO THESE TERMS AND CONDITIONS</h1>
 
         <div class="tandc-box">
-            <p>Co-Browsing Session Terms and Conditions...</p>
-            <!-- Insert terms and conditions text here -->
-            Co-Browsing Session Terms and Conditions 1. Introduction. By participating in a co-browsing session with a [Corpay, Inc.] (hereinafter "Corpay" or "Company") customer service representative ("Representative"), you agree to the following terms and conditions. If you do not agree, please do not proceed with the co-browsing session. 2. Purpose of Co-Browsing. Co-browsing is a tool that allows a [Corpay] Representative to view and interact with your web browser in real-time. This is intended to assist you in navigating the driven.fleet-account.com website. 3. Scope of Access. The Representative will have access only to the browser window you share during the co-browsing session. They will not have access to other tabs, windows, applications, files, folders, or personal data on your device. You retain full control during the session and can end the co-browsing session at any time by clicking End Session. 4. Information Shared During Co-Browsing. During the session, the Representative will see information displayed in the shared browser window. However, personal information, such as passwords, account numbers, and routing numbers will be masked. During the co-browsing session, you agree not to provide, share or display any personal or sensitive information (e.g., passwords, account numbers, routing numbers). The Representative will not ask for such information during the co-browsing session. 5. Privacy and Data Protection.[Corpay] values your privacy and will use the information viewed during the co-browsing session solely for the purpose of assisting you with navigating our website. The co-browsing session may be recorded for quality assurance and training purposes, and you expressly agree to such recording. The Company's privacy policy ("Privacy Policy") is available on the Company's website. The Privacy Policy provides you with information about how the Company collects, uses, and shares personal information. It also describes choices and rights available to you regarding your personal information. By agreeing to these terms, you consent to the collection, use, and storage of your data as described herein and in the Privacy Policy. 6. Liability. [Corpay] will not be liable for any loss or damage that may arise directly or indirectly from the co-browsing session, except where caused by [Corpay]’s gross negligence or willful misconduct. You are responsible for ensuring that any sensitive or confidential information is not shared or displayed during the session. 7. Termination of Session. You or the Representative may terminate the co-browsing session at any time. [Corpay] reserves the right to terminate the session if inappropriate content is displayed or if the session is being used for purposes other than its intended use. 8. Governing Law. These terms and conditions are governed by the laws of [Jurisdiction], without regard to its conflict of law principles. 9. Contact Information. If you have any questions or concerns regarding these terms and conditions, please contact [Corpay] at [Contact Information]. By sharing the 4 digit code with the agent, you acknowledge that you have read, understood, and agree to these Terms and Conditions.
+            <p>Co-Browsing Session Terms and Conditions</p>
+            <!-- Insert new terms and conditions text here -->
+1. Introduction
+By participating in a co-browsing session with your fuel card provider ("Company") customer service representative ("Representative"), you agree to the following terms and conditions. If you do not agree, please do not proceed with the co-browsing session.
+<br>2. Purpose of Co-Browsing
+Co-browsing is a tool that allows a Company Representative to view and interact with your web browser in real time. The purpose of the co-browsing session is to enable us to assist you in navigating a Company user interface to manage your fuel card accounts. 
+<br>3. Scope of Access
+The Representative will have access only to the browser tab you share during the co-browsing session. They will not have access to other tabs, windows, or applications on your device.
+The Representative cannot and will not access any files, folders, or personal data on your device.
+You retain complete control during the session and can end the co-browsing session at any time by clicking the "X" button or closing your browser tab.
+<br>4. Information Shared During Co-Browsing
+The Representative will see information displayed in the shared browser tab during the session. Personal information, such as account numbers and passwords, will be masked.  
+During the session, you agree not to provide, share, or display personal or sensitive information. The Representative will not ask for such information during the co-browsing session.
+<br>5. Privacy and Data Protection
+Company values your privacy and will use the information viewed during the co-browsing session solely to assist you with managing your fuel card accounts.
+Company is recording the co-browsing session for quality assurance and training purposes, and you expressly agree to such recording.  
+The Company's privacy policy ("Privacy Policy") is available on its website. The Privacy Policy provides information about how the Company collects, uses, and shares personal information and describes the choices and rights available to you regarding your personal information.
+By agreeing to these terms, you consent to the collection, use, and storage of your data as described herein and in the Privacy Policy.
+<br>6. Liability
+Company will not be liable for any loss or damage that may arise directly or indirectly from the co-browsing session, except if such losses or damages are caused by Company’s gross negligence or willful misconduct.
+You are responsible for ensuring that sensitive or confidential information is not shared or displayed during the session.
+<br>7. Termination of Session
+You or the Representative may terminate the co-browsing session at any time.
+Company reserves the right to terminate the session if inappropriate content is displayed or if it is being used for purposes other than its intended use.
+<br>8. Contact Information
+If you have any questions or concerns about these terms and conditions, please use the contact information previously provided to contact the Company.
+<br>By proceeding with the co-browsing session, you acknowledge that you have read, understood, and agree to these Terms and Conditions.
         </div>
 
-        <div class="code-box">
+        <label>
+            <input type="checkbox" id="termsCheckbox"> I accept the above Terms and Conditions.
+        </label>
+        
+        <button class="accept-button" id="acceptButton" disabled>Proceed</button>
+
+        <div class="code-box" id="codeBox">
             Your PINCODE: <b><span id="sessidtarget">...</span></b>
         </div>
 
-        <div class="waiting-message">
+        <div class="waiting-message" id="waitingMessage">
             Waiting for Agent to join!
         </div>
     </div>
 
     <script>
+        // Enable button only when checkbox is checked
+        document.getElementById('termsCheckbox').addEventListener('change', function() {
+            document.getElementById('acceptButton').disabled = !this.checked;
+        });
+
         // Surfly snippet
         (function(s,u,r,f,l,y){s[f]=s[f]||{init:function(){s[f].q=arguments}};
         l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
@@ -144,16 +205,27 @@
             url: "https://driven.fleet-account.com/"
         };
 
-        // Initialize Surfly and handle session creation
-        Surfly.init(settings, function(init) {
-            if (init.success && !Surfly.isInsideSession) {
-                Surfly.session()
-                .on("session_created", function(session, event) {
-                    // Display the PIN of the current session
-                    document.querySelector("#sessidtarget").innerText = session.pin;
-                })
-                .startLeader();
-            }
+        // Handle button click
+        document.getElementById('acceptButton').addEventListener('click', function() {
+            // Hide the button after click
+            document.getElementById('acceptButton').style.display = 'none';
+
+            // Initialize Surfly and handle session creation
+            Surfly.init(settings, function(init) {
+                if (init.success && !Surfly.isInsideSession) {
+                    Surfly.session()
+                    .on("session_created", function(session, event) {
+                        // Display the PIN of the current session
+                        document.querySelector("#sessidtarget").innerText = session.pin;
+                        // Show the PIN and waiting message
+                        document.getElementById('codeBox').style.display = 'block';
+                        document.getElementById('waitingMessage').style.display = 'block';
+                    })
+                    .startLeader();
+                } else {
+                    console.error("Surfly initialization failed or session is already active.");
+                }
+            });
         });
     </script>
 </body>
