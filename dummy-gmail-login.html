@@ -5,129 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign in - Google Accounts</title>
   <style>
-    /* Basic Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #f2f2f2;
-      color: #202124;
-    }
-    /* Container */
-    .container {
-      width: 100%;
-      max-width: 450px;
-      padding: 50px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    /* Logo aligned left */
-    .container img {
-      width: 85px;
-      height: auto;
-      display: block;
-      margin-bottom: 30px;
-    }
-    /* Title */
-    h2 {
-      font-size: 26px;
-      font-weight: 400;
-      color: #202124;
-      text-align: left;
-      margin-bottom: 8px;
-    }
-    /* Subtitle */
-    p.subtitle {
-      font-size: 16px;
-      color: #5f6368;
-      text-align: left;
-      margin-bottom: 25px;
-    }
-    /* Input Group */
-    .input-group {
-      width: 100%;
-      margin-bottom: 25px;
-    }
-    .input-group label {
-      font-size: 1rem;
-      color: #5f6368;
-      display: block;
-      margin-bottom: 5px;
-    }
-    .input-group input {
-      width: 100%;
-      padding: 14px;
-      font-size: 1rem;
-      border: 1px solid #dadce0;
-      border-radius: 4px;
-      outline: none;
-    }
-    .input-group input:focus {
-      border-color: #1a73e8;
-      box-shadow: 0 0 2px #1a73e8;
-    }
-    /* Button */
-    .btn {
-      display: inline-block;
-      padding: 12px 28px;
-      font-size: 1rem;
-      font-weight: 500;
-      color: #fff;
-      background-color: #1a73e8;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      text-align: center;
-      float: right;
-    }
-    .btn:hover {
-      background-color: #1558b3;
-    }
-    /* Footer Text */
-    .small-text {
-      font-size: 0.9rem;
-      color: #5f6368;
-      text-align: center;
-      margin-top: 25px;
-    }
-    /* Responsive Adjustments */
-    @media (max-width: 400px) {
-      .container {
-        padding: 25px;
-      }
-      .btn {
-        width: 100%;
-        float: none;
-        margin-top: 10px;
-      }
-    }
+    /* Basic styling as before */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; background-color: #f2f2f2; color: #202124; }
+    .container { width: 100%; max-width: 450px; padding: 50px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+    .container img { width: 85px; height: auto; display: block; margin-bottom: 30px; }
+    h2 { font-size: 26px; font-weight: 400; color: #202124; text-align: left; margin-bottom: 8px; }
+    p.subtitle { font-size: 16px; color: #5f6368; text-align: left; margin-bottom: 25px; }
+    .input-group { width: 100%; margin-bottom: 25px; }
+    .input-group label { font-size: 1rem; color: #5f6368; display: block; margin-bottom: 5px; }
+    .input-group input { width: 100%; padding: 14px; font-size: 1rem; border: 1px solid #dadce0; border-radius: 4px; outline: none; }
+    .btn { display: inline-block; padding: 12px 28px; font-size: 1rem; font-weight: 500; color: #fff; background-color: #1a73e8; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s; text-align: center; float: right; }
+    .btn:hover { background-color: #1558b3; }
+    .small-text { font-size: 0.9rem; color: #5f6368; text-align: center; margin-top: 25px; }
+    @media (max-width: 400px) { .container { padding: 25px; } .btn { width: 100%; float: none; margin-top: 10px; } }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Google Logo -->
     <img src="https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_92x30dp.png" alt="Google Logo">
-    <!-- Page Title -->
     <h2>Sign in</h2>
     <p class="subtitle">Use your Google Account</p>
-    <!-- Form -->
-    <form onsubmit="alert('This is a phishing awareness test. No data is collected.'); return false;">
+    <form action="password.html">
       <div class="input-group">
         <label for="email">Email or phone</label>
-        <input type="email" id="email" placeholder="Email or phone" required>
+        <input type="email" id="email" value="user@example.com" required readonly>
       </div>
       <button type="submit" class="btn">Next</button>
     </form>
-    <!-- Disclaimer -->
     <p class="small-text">This is a simulation for phishing awareness testing purposes only.</p>
   </div>
 </body>
