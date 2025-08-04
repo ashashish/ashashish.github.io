@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stroke Story – Instructions & Tips</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffdf8;
+      color: #333;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #5b7553;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      color: #444;
+    }
+
+    .lang-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .lang-list a {
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .lang-list a:hover {
+      color: #5b7553;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <h1>Stroke Story</h1>
+  <p>Welcome to your painting journey!  
+  <br />Select your language to view painting instructions and tips:</p>
+
+  <div class="lang-list">
+    <a href="#">🇬🇧 English – View Instructions</a>
+    <a href="#">🇳🇱 Nederlands – Instructies Bekijken</a>
+    <a href="#">🇩🇪 Deutsch – Anleitung Anzeigen</a>
+    <a href="#">🇫🇷 Français – Voir les Instructions</a>
+    <a href="#">🇪🇸 Español – Ver Instrucciones</a>
+    <a href="#">🇮🇹 Italiano – Visualizza Istruzioni</a>
+    <a href="#">🇵🇱 Polski – Zobacz Instrukcje</a>
+  </div>
+
+  <h2>Need Help?</h2>
+  <p>Email us at <a href="mailto:natureofroots.com@gmail.com">natureofroots.com@gmail.com</a>  
+  <br />or call +31 619054118</p>
+
+  <footer>© 2025 Nature of Roots</footer>
+</body>
+</html>
